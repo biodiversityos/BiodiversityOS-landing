@@ -11,7 +11,7 @@ export default function Header() {
           <span>BiodiversityOS</span>
         </div>
         <a
-          href={process.env.NEXT_PUBLIC_APP_URL ?? "https://app.oceanwatch.xyz"}
+          href={process.env.NEXT_PUBLIC_APP_URL ?? "https://app.biodiversityos.org"}
           className="text-xs font-bold uppercase tracking-widest text-white bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-900/20 backdrop-blur-md border border-emerald-400/20"
         >
           Launch App
