@@ -50,7 +50,7 @@ export default function HeroSection() {
             </p>
             <div className="mt-12 flex flex-wrap gap-6">
               <a
-                href="https://app.oceanwatch.xyz"
+                href={process.env.NEXT_PUBLIC_APP_URL ?? "https://app.oceanwatch.xyz"}
                 className="group relative inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-lg px-10 py-5 rounded-full transition-all hover:scale-105 shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
               >
                 Launch Live Map

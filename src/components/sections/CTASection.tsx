@@ -40,7 +40,7 @@ export default function CTASection() {
 
         <div className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8">
           <a
-            href="https://app.oceanwatch.xyz"
+            href={process.env.NEXT_PUBLIC_APP_URL ?? "https://app.oceanwatch.xyz"}
             className="group relative inline-flex items-center justify-center px-12 py-6 overflow-hidden font-bold text-white transition-all duration-300 bg-emerald-600 rounded-full hover:bg-emerald-500 hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(16,185,129,0.4)]"
           >
             <span className="relative z-10 flex items-center gap-3 text-xl tracking-tight">
