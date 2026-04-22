@@ -9,11 +9,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "OceanWatch — Digital citizen science for Mar Sustentable",
+  title: "BiodiversityOS — Digital citizen science for Mar Sustentable",
   description:
-    "OceanWatch is the on-chain citizen science tool built with Mar Sustentable to preserve coral reefs, mangroves, and sharks across the Mexican Caribbean.",
+    "BiodiversityOS is the on-chain citizen science tool built with Mar Sustentable to preserve coral reefs, mangroves, and sharks across the Mexican Caribbean.",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/image.png",
   },
 };
 
