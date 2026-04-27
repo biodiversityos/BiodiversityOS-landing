@@ -10,7 +10,7 @@ import * as THREE from "three";
  * with pointer-events: none and still follow the cursor.
  */
 
-const MAX_TRAIL = 48;
+const MAX_TRAIL = 64;
 
 // Global mouse UV so the mesh can read it without raycasting
 const globalMouse = { x: -10, y: -10 };
@@ -127,16 +127,16 @@ const WaterEffect = () => {
 
       float wireframe = max(edgeLine * 0.4, vertDot * 1.0);
 
-      // Very faint base grid
-      float baseAlpha = wireframe * 0.012;
+      // Very faint base grid (increased visibility)
+      float baseAlpha = wireframe * 0.05;
 
-      // Wave lights up the wireframe
-      float waveAlpha = wave * wireframe * 0.5;
+      // Wave lights up the wireframe (increased intensity)
+      float waveAlpha = wave * wireframe * 1.5;
 
       float alpha = baseAlpha + waveAlpha;
 
-      // Subtle ocean-matching color: dark sky blue
-      vec3 color = vec3(0.22, 0.62, 0.88);
+      // Subtle ocean-matching color (made brighter)
+      vec3 color = vec3(0.35, 0.85, 1.0);
 
       gl_FragColor = vec4(color, alpha);
     }
@@ -147,9 +147,9 @@ const WaterEffect = () => {
 
     const opacities = shaderRef.current.uniforms.uTrailOpacity.value;
 
-    // Fade existing trail
+    // Fade existing trail (slowed down for visibility)
     for (let i = 0; i < MAX_TRAIL; i++) {
-      opacities[i] = Math.max(0, opacities[i] - delta * 0.7);
+      opacities[i] = Math.max(0, opacities[i] - delta * 0.4);
     }
 
     // Drop trail points as cursor moves

@@ -1,21 +1,134 @@
-import React from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import styles from "./Header.module.css";
+import SharkIcon from "../ui/SharkIcon";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="absolute top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
-        <div className="flex items-center gap-4 text-white font-bold text-xl tracking-tighter">
-          <span className="text-xl opacity-40">BIOS</span>
-          <div className="w-px h-6 bg-white/10"></div>
-          <span>BiodiversityOS</span>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`} role="banner">
+      <div className={styles.container}>
+        <Link href="/" className={styles.logoGroup}>
+          <SharkIcon
+            size={32}
+            color="var(--color-primary)"
+            className={styles.logoIcon}
+          />
+          <span className={styles.logoText}>BiodiversityOS</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className={styles.navigation} aria-label="Main navigation">
+          <Link href="#about" className={styles.navLink}>
+            About
+          </Link>
+          <Link href="#map" className={styles.navLink}>
+            Map
+          </Link>
+          <Link href="#tech" className={styles.navLink}>
+            Technology
+          </Link>
+          <Link href="#who-is-it-for" className={styles.navLink}>
+            Community
+          </Link>
+        </nav>
+
+        <div className={styles.actions}>
+          <Link
+            href="https://app.biodiversityos.org/"
+            target="_blank"
+            className={styles.btnOutline}
+          >
+            Explore the Map
+          </Link>
+          <Link
+            href="https://app.biodiversityos.org/"
+            target="_blank"
+            className={styles.btnPrimary}
+          >
+            Report a Sighting
+          </Link>
         </div>
-        <a
-          href={process.env.NEXT_PUBLIC_APP_URL ?? "https://app.biodiversityos.org"}
-          className="text-xs font-bold uppercase tracking-widest text-white bg-emerald-600 hover:bg-emerald-500 px-8 py-4 rounded-full transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-900/20 backdrop-blur-md border border-emerald-400/20"
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className={styles.menuToggle}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
         >
-          Launch App
-        </a>
+          <div
+            className={`${styles.hamburger} ${isMenuOpen ? styles.open : ""}`}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ""}`}
+      >
+        <nav className={styles.mobileNav} aria-label="Mobile navigation">
+          <Link
+            href="#about"
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About
+          </Link>
+          <Link
+            href="#map"
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Map
+          </Link>
+          <Link
+            href="#tech"
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Technology
+          </Link>
+          <Link
+            href="#who-is-it-for"
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Community
+          </Link>
+
+          <div className={styles.mobileActions}>
+            <Link
+              href="#map"
+              className={styles.mobileBtnOutline}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Explore the Map
+            </Link>
+            <Link
+              href="#report"
+              className={styles.mobileBtnPrimary}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Report a Sighting
+            </Link>
+          </div>
+        </nav>
       </div>
     </header>
   );
