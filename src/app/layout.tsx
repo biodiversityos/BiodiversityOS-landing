@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -248,7 +249,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         {children}
-        <script
+        <Script
+          id="reveal-on-scroll"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               const observerOptions = {
@@ -264,12 +267,8 @@ export default function RootLayout({
                 });
               }, observerOptions);
 
-              document.addEventListener('DOMContentLoaded', () => {
-                const elements = document.querySelectorAll('.reveal-on-scroll');
-                elements.forEach(el => observer.observe(el));
-              });
+              document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
 
-              // Also handle dynamic content if needed
               const mutationObserver = new MutationObserver((mutations) => {
                 mutations.forEach(mutation => {
                   mutation.addedNodes.forEach(node => {

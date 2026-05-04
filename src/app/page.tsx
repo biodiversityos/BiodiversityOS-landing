@@ -6,6 +6,8 @@ import AppSection from "@/components/sections/AppSection";
 import TechSection from "@/components/sections/TechSection";
 import WhoIsItForSection from "@/components/sections/WhoIsItForSection";
 import AboutSection from "@/components/sections/AboutSection";
+import SupportSection from "@/components/sections/SupportSection";
+import CTABanner from "@/components/seo/CTABanner";
 
 export const metadata: Metadata = {
   title:
@@ -32,6 +34,10 @@ export default function Home() {
         <TechSection />
 
         <WhoIsItForSection />
+
+        <SupportSection />
+
+        <CTABanner />
       </main>
 
       <Footer />

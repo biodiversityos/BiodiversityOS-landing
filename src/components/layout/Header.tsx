@@ -31,17 +31,17 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className={styles.navigation} aria-label="Main navigation">
-          <Link href="#about" className={styles.navLink}>
+          <Link href="/about" className={styles.navLink}>
             About
           </Link>
-          <Link href="#map" className={styles.navLink}>
-            Map
+          <Link href="/features" className={styles.navLink}>
+            Features
           </Link>
-          <Link href="#tech" className={styles.navLink}>
-            Technology
+          <Link href="/species" className={styles.navLink}>
+            Species
           </Link>
-          <Link href="#who-is-it-for" className={styles.navLink}>
-            Community
+          <Link href="/blog" className={styles.navLink}>
+            Blog
           </Link>
         </nav>
 
@@ -84,32 +84,32 @@ export default function Header() {
       >
         <nav className={styles.mobileNav} aria-label="Mobile navigation">
           <Link
-            href="#about"
+            href="/about"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
             About
           </Link>
           <Link
-            href="#map"
+            href="/features"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
-            Map
+            Features
           </Link>
           <Link
-            href="#tech"
+            href="/species"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
-            Technology
+            Species
           </Link>
           <Link
-            href="#who-is-it-for"
+            href="/blog"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
-            Community
+            Blog
           </Link>
 
           <div className={styles.mobileActions}>
