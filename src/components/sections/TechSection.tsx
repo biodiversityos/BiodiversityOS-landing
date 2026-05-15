@@ -108,9 +108,8 @@ export default function TechSection() {
               <div className={styles.stepContent}>
                 <h3 className={styles.stepTitle}>Decentralized Integrity</h3>
                 <p className={styles.stepDesc}>
-                  Built with decentralized technologies to strengthen data
-                  traceability, attribution, and long-term accessibility of
-                  biodiversity records.
+                  Designed for data traceability and long-term accessibility,
+                  with attribution built into every contribution.
                 </p>
               </div>
             </div>

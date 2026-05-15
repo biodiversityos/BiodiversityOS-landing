@@ -59,8 +59,8 @@ export default function WhoIsItForSection() {
                 color: "var(--color-text-muted)",
               }}
             >
-              Join a global network to close biodiversity data gaps and turn
-              observations into impact.
+              Biodiversity data gaps are significant. Observations from divers,
+              fishers, and researchers help build a more complete picture.
             </p>
           </div>
 
@@ -119,8 +119,8 @@ export default function WhoIsItForSection() {
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>Web3 / DeSci Community</h3>
                 <p className={styles.cardDesc}>
-                  Support and co-create open scientific infrastructure through
-                  decentralized technologies.
+                  Engage with open biodiversity infrastructure and contribute to
+                  a community-governed data commons.
                 </p>
               </div>
             </div>

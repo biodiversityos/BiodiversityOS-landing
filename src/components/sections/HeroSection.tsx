@@ -27,6 +27,7 @@ export default function HeroSection() {
             <Link
               href="https://app.biodiversityos.org/"
               target="_blank"
+              rel="noopener noreferrer"
               className={styles.btnPrimary}
             >
               <SharkIcon size={20} color="white" className={styles.btnIcon} />
@@ -35,6 +36,7 @@ export default function HeroSection() {
             <Link
               href="https://app.biodiversityos.org/"
               target="_blank"
+              rel="noopener noreferrer"
               className={styles.btnSecondary}
             >
               <SharkIcon

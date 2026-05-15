@@ -21,7 +21,7 @@ export default function AppSection() {
       >
         <div className={styles.container}>
           <div className={styles.header}>
-            <div className={styles.eyebrow}>Platform & Core Principles</div>
+            <div className={styles.eyebrow}>Platform Preview</div>
             <h2 className={styles.title}>Data that empowers action.</h2>
           </div>
 
@@ -29,7 +29,7 @@ export default function AppSection() {
             <div className={styles.mockupSide}>
               <div className={styles.mockupContainer + " relative"}>
                 {/* Filter Panel Mockup */}
-                <div className="absolute top-4 left-4 z-[1000] bg-white/95 backdrop-blur-md px-5 py-5 rounded-2xl shadow-2xl border border-white/20 w-[280px] text-left pointer-events-none">
+                <div aria-hidden="true" className="absolute top-4 left-4 z-[1000] bg-white/95 backdrop-blur-md px-5 py-5 rounded-2xl shadow-2xl border border-white/20 w-[280px] text-left pointer-events-none">
                   <h3 className="text-base font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-1">
                     OceanWatch Map
                   </h3>
@@ -116,18 +116,18 @@ export default function AppSection() {
 
             <div className={styles.textSide}>
               <div className={styles.featureCard}>
-                <h3>Real-Time Spatial Insights</h3>
+                <h3>Georeferenced Sighting Map</h3>
                 <p>
-                  Transforming sightings into dynamic maps of species presence.
+                  Plot observations on an interactive map. Filter by species, behavior, and date range to explore distribution patterns.
                 </p>
               </div>
               <div className={styles.featureCard}>
                 <h3>Scientific Integrity</h3>
-                <p>Applying structured methodologies to ensure data quality.</p>
+                <p>Each observation follows a structured data schema. Community submissions are reviewed to maintain scientific reliability.</p>
               </div>
               <div className={styles.featureCard}>
                 <h3>Community Verification</h3>
-                <p>Combining local knowledge and scientific validation.</p>
+                <p>Local ecological knowledge from fishers and divers is integrated with field research methods developed by Mar Sustentable.</p>
               </div>
             </div>
           </div>

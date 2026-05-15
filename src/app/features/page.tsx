@@ -10,24 +10,22 @@ import {
   Users,
   Download,
   Shield,
-  Eye,
-  BarChart3,
 } from "lucide-react";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Features — Interactive Biodiversity Mapping & Data Tools",
+  title: "Platform Features — BiodiversityOS Marine Data Tools",
   description:
-    "Explore BiodiversityOS features: interactive species maps, real-time shark tracking, temporal data filtering, community verification, georeferenced data exports, and open API access for marine conservation research.",
+    "BiodiversityOS features: an interactive map of shark sightings in Cozumel, species and behavior filters, temporal data selection, community verification, and georeferenced data export for conservation research.",
   keywords: [
-    "biodiversity mapping features",
-    "species tracking tool",
+    "biodiversity mapping",
     "marine data visualization",
     "interactive biodiversity map",
-    "shark tracking software",
-    "citizen science platform features",
+    "shark sighting map",
+    "citizen science platform",
     "georeferenced data export",
     "marine species filtering",
+    "open biodiversity data",
   ],
   alternates: {
     canonical: "https://biodiversityos.org/features",
@@ -39,40 +37,40 @@ const features = [
     icon: Map,
     title: "Interactive Biodiversity Map",
     description:
-      "Explore a dynamic, real-time map showing shark sightings and marine species observations across the Mexican Caribbean. Zoom into dive sites, identify hotspots, and visualize biodiversity patterns geographically.",
+      "Explore a map of shark sightings and marine species observations in the Mexican Caribbean. Navigate by location, zoom into specific areas, and visualize where species have been documented.",
     highlights: [
-      "Real-time sighting markers",
-      "Heatmap visualization",
-      "Dive site overlays",
-      "Satellite & terrain views",
+      "Georeferenced sighting markers",
+      "Geographic filtering",
+      "Cozumel region focus",
+      "Open map tiles (OpenStreetMap)",
     ],
     color: "#2563EB",
     bgColor: "#EFF6FF",
   },
   {
     icon: Filter,
-    title: "Advanced Species Filtering",
+    title: "Species & Behavior Filtering",
     description:
-      "Filter observations by species, behavior type, size class, and environmental conditions. Quickly isolate the data that matters for your research or conservation planning.",
+      "Filter observations by species and behavior type. Isolate the data relevant to your research or conservation planning without wading through unrelated records.",
     highlights: [
-      "Multi-species selection",
+      "Species selection",
       "Behavioral categories",
-      "Size classification",
-      "Depth range filtering",
+      "Date range selection",
+      "Combined filter queries",
     ],
     color: "#0D9488",
     bgColor: "#F0FDFA",
   },
   {
     icon: Clock,
-    title: "Temporal Analysis",
+    title: "Temporal Filtering",
     description:
-      "Analyze biodiversity trends over time with powerful date range selectors and timeline sliders. Track seasonal migration patterns, population changes, and long-term ecological trends.",
+      "Select date ranges to explore sightings over time. Useful for comparing observations across seasons or tracking data coverage over a research period.",
     highlights: [
       "Custom date ranges",
-      "Seasonal pattern detection",
       "Timeline slider",
-      "Historical comparison",
+      "Chronological sighting view",
+      "Data coverage overview",
     ],
     color: "#7C3AED",
     bgColor: "#F5F3FF",
@@ -81,68 +79,40 @@ const features = [
     icon: Users,
     title: "Community Verification",
     description:
-      "Every observation goes through our community-driven verification system. Combine local ecological knowledge with scientific validation to ensure data integrity and reliability.",
+      "Observations are reviewed through a community process that combines local ecological knowledge with scientific validation — the same approach used by Mar Sustentable in the field.",
     highlights: [
-      "Peer review system",
-      "Expert validation",
-      "Confidence scoring",
+      "Community review process",
+      "Local knowledge integration",
+      "Structured data schema",
       "Attribution tracking",
     ],
     color: "#059669",
     bgColor: "#ECFDF5",
   },
   {
-    icon: Eye,
-    title: "Species Identification Tools",
-    description:
-      "Access comprehensive species profiles with identification guides, distinguishing features, and reference photos. Learn to differentiate between similar species with expert-curated content.",
-    highlights: [
-      "Photo reference library",
-      "Key identification features",
-      "IUCN conservation status",
-      "Behavioral indicators",
-    ],
-    color: "#DC2626",
-    bgColor: "#FEF2F2",
-  },
-  {
-    icon: BarChart3,
-    title: "Behavioral Analysis",
-    description:
-      "Record and analyze marine species behavior including feeding patterns, social interactions, territorial behavior, and responses to environmental changes.",
-    highlights: [
-      "Behavior categorization",
-      "Activity pattern analysis",
-      "Social group tracking",
-      "Environmental correlation",
-    ],
-    color: "#EA580C",
-    bgColor: "#FFF7ED",
-  },
-  {
     icon: Download,
     title: "Georeferenced Data Export",
     description:
-      "Export structured, georeferenced biodiversity data in standard formats for use in GIS software, research papers, and conservation planning tools.",
+      "Export structured, georeferenced biodiversity data in standard formats for use in GIS software, research papers, and conservation planning.",
     highlights: [
-      "GeoJSON & CSV exports",
+      "GeoJSON & CSV formats",
       "Standard metadata schemas",
-      "Citation-ready formats",
-      "Bulk download options",
+      "Citation-ready structure",
+      "Open access downloads",
     ],
     color: "#1C4D8D",
     bgColor: "#EEF5FC",
   },
   {
     icon: Shield,
-    title: "Decentralized Data Integrity",
+    title: "Data Traceability",
     description:
-      "Built with decentralized technologies to ensure every biodiversity record is traceable, attributed, and permanently accessible. No single point of failure for critical conservation data.",
+      "Each observation is linked to its contributor with transparent attribution. The verification chain — from submission to review — is recorded and accessible.",
     highlights: [
-      "Immutable records",
-      "Transparent provenance",
       "Contributor attribution",
-      "Long-term preservation",
+      "Transparent provenance",
+      "Structured verification trail",
+      "Long-term accessibility",
     ],
     color: "#6D28D9",
     bgColor: "#F5F3FF",
@@ -182,9 +152,9 @@ export default function FeaturesPage() {
       <Header />
       <main className="flex-1 w-full" role="main">
         <PageHero
-          eyebrow="Platform Capabilities"
-          title="Powerful Tools for Marine Conservation"
-          description="BiodiversityOS provides a comprehensive suite of tools for collecting, analyzing, and sharing marine biodiversity data — free and open for everyone."
+          eyebrow="Platform"
+          title="Tools for Marine Biodiversity Data"
+          description="BiodiversityOS provides tools for submitting, exploring, and exporting marine biodiversity observations — built on open principles and grounded in field research."
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Features" },

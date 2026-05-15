@@ -63,8 +63,8 @@ const faqStructuredData = [
     a: "Your contributed data is used to build a comprehensive picture of marine biodiversity. It feeds into interactive maps, species distribution analyses, and conservation research.",
   },
   {
-    q: "Is the BiodiversityOS platform open source?",
-    a: "Yes, BiodiversityOS is committed to open-source principles. Our codebase is available on GitHub, and we welcome contributions from developers, researchers, and the community.",
+    q: "Is BiodiversityOS committed to open principles?",
+    a: "Yes. BiodiversityOS is built around open data principles: observations are openly accessible, contributors receive attribution, and the platform is designed to avoid locking data behind proprietary systems.",
   },
 ];
 

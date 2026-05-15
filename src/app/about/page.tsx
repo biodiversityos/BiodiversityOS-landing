@@ -6,18 +6,17 @@ import CTABanner from "@/components/seo/CTABanner";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "About BiodiversityOS — Our Mission, Story & Team",
+  title: "About BiodiversityOS — Research, Mission & Story",
   description:
-    "Learn about BiodiversityOS: born from years of shark research in Cozumel by Mar Sustentable, we're building open infrastructure to map and protect marine biodiversity worldwide through community-driven science.",
+    "BiodiversityOS is built on field research by Mar Sustentable in the Mexican Caribbean, ongoing since 2015. Learn about the research behind the platform and the principles guiding it.",
   keywords: [
     "about BiodiversityOS",
-    "Mar Sustentable Cozumel",
-    "marine conservation mission",
-    "ocean research team",
-    "biodiversity intelligence",
-    "citizen science organization",
-    "DeSci marine research",
+    "Mar Sustentable",
     "Cozumel shark research",
+    "marine conservation",
+    "citizen science",
+    "open biodiversity data",
+    "Mexican Caribbean research",
   ],
   alternates: {
     canonical: "https://biodiversityos.org/about",
@@ -26,40 +25,28 @@ export const metadata: Metadata = {
 
 const timeline = [
   {
-    year: "2018",
-    title: "Mar Sustentable Founded",
+    year: "2015",
+    title: "Field Research Begins",
     description:
-      "Field research begins in Cozumel to document shark presence and marine biodiversity in the Mexican Caribbean.",
+      "Mar Sustentable initiates shark documentation research in Holbox, Mexico. The approach combines fishers' Local Ecological Knowledge with geospatial methods to document shark diversity and habitat use.",
   },
   {
-    year: "2020",
-    title: "Data Collection Expands",
+    year: "2021",
+    title: "Research Expands to Cozumel Region",
     description:
-      "Hundreds of shark sightings documented. Partnerships form with local dive operators and conservation groups.",
+      "Field research extends to Isla Mujeres and Cozumel. Club de los Tiburones México launches with Save Our Seas Foundation support, bringing shark conservation education to students across Latin America and the Caribbean.",
   },
   {
-    year: "2022",
-    title: "Digital Platform Vision",
+    year: "2018–present",
+    title: "Science Outreach",
     description:
-      "The need for a structured, open data platform becomes clear. BiodiversityOS concept takes shape.",
+      "Mar Sustentable produces educational content on marine biodiversity, reaching communities across the region with science communication grounded in ongoing field research.",
   },
   {
-    year: "2024",
-    title: "BiodiversityOS Launched",
+    year: "Now",
+    title: "BiodiversityOS",
     description:
-      "First version of the platform goes live with interactive mapping, species filtering, and community data submission.",
-  },
-  {
-    year: "2025",
-    title: "DeSci Integration",
-    description:
-      "Decentralized science technologies integrated for data traceability, attribution, and permanent accessibility.",
-  },
-  {
-    year: "2026",
-    title: "Global Expansion",
-    description:
-      "Platform expanding beyond Cozumel to cover more regions of the Caribbean and beyond, building a global biodiversity network.",
+      "Open data infrastructure built on top of this fieldwork — interactive maps, structured sighting records, and community data submission to make marine biodiversity research accessible and collaborative.",
   },
 ];
 
@@ -68,37 +55,37 @@ const values = [
     emoji: "🔬",
     title: "Scientific Rigor",
     description:
-      "Every observation follows structured methodologies. We maintain research-grade data standards while remaining accessible to all contributors.",
+      "Observations follow structured data schemas grounded in the field methodologies developed by Mar Sustentable over years of research in the Mexican Caribbean.",
   },
   {
     emoji: "🌊",
     title: "Ocean First",
     description:
-      "Our work is driven by a deep commitment to marine ecosystems. Every feature we build serves the goal of understanding and protecting ocean life.",
+      "The platform exists to serve conservation. Every design decision prioritizes the usefulness and reliability of marine biodiversity data over growth metrics.",
   },
   {
     emoji: "🤝",
-    title: "Community Power",
+    title: "Community Knowledge",
     description:
-      "We believe the best conservation science happens when researchers, local communities, divers, and technologists work together.",
+      "Fishers, divers, and local observers hold ecological knowledge that formal research often misses. BiodiversityOS is designed to recognize and integrate these contributions.",
   },
   {
     emoji: "🔓",
-    title: "Open by Default",
+    title: "Open Access",
     description:
-      "Data should be free. Our platform, code, and collected data are open and accessible to anyone working toward conservation.",
+      "Biodiversity observations collected through the platform are openly accessible for research, conservation planning, and public understanding.",
   },
   {
-    emoji: "🌐",
-    title: "Decentralized Trust",
+    emoji: "🔗",
+    title: "Attribution",
     description:
-      "Using DeSci principles to ensure data integrity, proper attribution, and permanent accessibility without centralized control.",
+      "Contributors receive credit for their observations. Proper attribution is built into the data model — not an afterthought.",
   },
   {
     emoji: "🌱",
     title: "Long-Term Thinking",
     description:
-      "We build for permanence. Biodiversity records should outlast any single organization, server, or funding cycle.",
+      "Biodiversity records should outlast any single organization or funding cycle. The platform is designed with data permanence and accessibility as core requirements.",
   },
 ];
 
@@ -108,15 +95,18 @@ function AboutJsonLd() {
     "@type": "Organization",
     name: "BiodiversityOS",
     url: "https://biodiversityos.org",
-    logo: "https://biodiversityos.org/image.png",
+    logo: "https://biodiversityos.org/assets/image.png",
     description:
-      "Community-driven platform for collecting, structuring, and visualizing marine biodiversity data. Born from shark research in Cozumel by Mar Sustentable.",
-    foundingDate: "2024",
-    foundingLocation: {
-      "@type": "Place",
-      name: "Cozumel, Quintana Roo, Mexico",
+      "Open platform for marine biodiversity data, built on field research by Mar Sustentable in the Mexican Caribbean since 2015.",
+    parentOrganization: {
+      "@type": "Organization",
+      name: "Mar Sustentable",
+      url: "https://www.marsustentable.org",
     },
-    sameAs: ["https://app.biodiversityos.org"],
+    sameAs: [
+      "https://www.marsustentable.org",
+      "https://app.biodiversityos.org",
+    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Cozumel",
@@ -131,8 +121,8 @@ function AboutJsonLd() {
       "Marine Biodiversity",
       "Shark Conservation",
       "Citizen Science",
-      "Decentralized Science",
       "Ocean Data",
+      "Coral Reef Ecosystems",
     ],
   };
 
@@ -166,15 +156,23 @@ export default function AboutPage() {
             <div className={styles.missionContent}>
               <h2 className={styles.sectionTitle}>Our Mission</h2>
               <p className={styles.missionText}>
-                We are building the <strong>operating system for biodiversity data</strong> — 
-                a platform where communities, scientists, and technologists collaborate to 
-                document, understand, and protect the natural world. Starting with shark 
-                tracking in Cozumel, we envision a global network of open biodiversity intelligence.
+                BiodiversityOS provides open infrastructure for marine biodiversity data —
+                starting with shark observations in the Mexican Caribbean and designed to
+                grow through community participation.
               </p>
               <p className={styles.missionText}>
-                Our work with <strong>Mar Sustentable</strong> in the Mexican Caribbean has shown 
-                that when local knowledge meets modern technology, conservation becomes more 
-                effective, transparent, and inclusive. BiodiversityOS is the next step in this journey.
+                The platform is built on field research by{" "}
+                <a
+                  href="https://www.marsustentable.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "var(--color-primary)", textDecoration: "underline" }}
+                >
+                  Mar Sustentable
+                </a>
+                , whose work in the Mexican Caribbean has used fishers&apos; Local Ecological
+                Knowledge alongside geospatial tools since 2015. BiodiversityOS makes that
+                research approach scalable and open.
               </p>
             </div>
           </div>
@@ -222,40 +220,43 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Partners */}
+        {/* Research Foundation */}
         <section className={styles.partnersSection}>
           <div className={styles.partnersContainer}>
             <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "0.75rem" }}>
-              Partners & Collaborators
+              Research Foundation
             </h2>
             <p className={styles.valuesSubtitle}>
-              Working together to protect marine ecosystems
+              Built on verified field research, not assumptions
             </p>
             <div className={styles.partnersGrid}>
               {[
                 {
                   name: "Mar Sustentable",
-                  role: "Field Research & Data Collection",
-                  desc: "Leading marine conservation research in the Mexican Caribbean since 2018.",
+                  role: "Primary Research Partner",
+                  desc: "Marine conservation organization leading field research in the Mexican Caribbean since 2015, using fishers' Local Ecological Knowledge and geospatial methods.",
+                  url: "https://www.marsustentable.org",
                 },
                 {
-                  name: "Local Dive Operators",
-                  role: "Community Data Contributors",
-                  desc: "Dive professionals providing daily observations and species sightings.",
-                },
-                {
-                  name: "Academic Institutions",
-                  role: "Scientific Validation",
-                  desc: "Universities and research centers ensuring data quality and methodology.",
-                },
-                {
-                  name: "DeSci Community",
-                  role: "Technology & Infrastructure",
-                  desc: "Decentralized science builders providing open infrastructure and tooling.",
+                  name: "Club de los Tiburones México",
+                  role: "Education & Outreach",
+                  desc: "Shark conservation education program launched in 2021 with Save Our Seas Foundation support. Reached students across 10+ countries in Latin America and the Caribbean.",
+                  url: null,
                 },
               ].map((partner, i) => (
                 <div key={i} className={styles.partnerCard}>
-                  <h3 className={styles.partnerName}>{partner.name}</h3>
+                  {partner.url ? (
+                    <a
+                      href={partner.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <h3 className={styles.partnerName} style={{ textDecoration: "underline" }}>{partner.name}</h3>
+                    </a>
+                  ) : (
+                    <h3 className={styles.partnerName}>{partner.name}</h3>
+                  )}
                   <span className={styles.partnerRole}>{partner.role}</span>
                   <p className={styles.partnerDesc}>{partner.desc}</p>
                 </div>
@@ -265,12 +266,12 @@ export default function AboutPage() {
         </section>
 
         <CTABanner
-          title="Join Our Mission"
-          description="Whether you're a researcher, diver, conservationist, or developer — there's a place for you in BiodiversityOS."
-          primaryLabel="Get Involved"
-          primaryHref="/contact"
-          secondaryLabel="Explore Features"
-          secondaryHref="/features"
+          title="Explore the Platform"
+          description="Access the interactive map, report a sighting, or learn about the species documented in the Mexican Caribbean."
+          primaryLabel="Open the Map"
+          primaryHref="https://app.biodiversityos.org/"
+          secondaryLabel="Species Guide"
+          secondaryHref="/species"
         />
       </main>
       <Footer />

@@ -21,7 +21,7 @@ const faqData: FAQItem[] = [
     category: "General",
     question: "Is BiodiversityOS free to use?",
     answer:
-      "Yes, BiodiversityOS is completely free and open source. Anyone can access the data, contribute observations, and use our tools for research and conservation purposes. We believe biodiversity data should be open and accessible to everyone.",
+      "Yes, BiodiversityOS is free to use. Anyone can access the data, contribute observations, and use our tools for research and conservation purposes. We believe biodiversity data should be openly accessible.",
   },
   {
     category: "General",
@@ -83,9 +83,9 @@ const faqData: FAQItem[] = [
   },
   {
     category: "Technology",
-    question: "Is the BiodiversityOS platform open source?",
+    question: "Is BiodiversityOS committed to open principles?",
     answer:
-      "Yes, BiodiversityOS is committed to open-source principles. Our codebase is available on GitHub, and we welcome contributions from developers, researchers, and the community. This transparency ensures the platform evolves with the needs of conservation science.",
+      "Yes. BiodiversityOS is built around open data principles: observations are openly accessible, contributors receive attribution, and the platform is designed to avoid locking data behind proprietary systems. Openness is a design requirement, not just a policy.",
   },
 
   // Community

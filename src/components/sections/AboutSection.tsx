@@ -11,10 +11,19 @@ export default function AboutSection() {
           <h2 className={styles.title}>Rooted in real data and communities.</h2>
           <div className="space-y-4 text-[var(--color-text-muted)] text-lg">
             <p>
-              BiodiversityOS stems from years of field research in the Mexican Caribbean led by Mar Sustentable. What began as a project to document shark presence in Cozumel has evolved into a global vision for open biodiversity intelligence.
+              BiodiversityOS stems from years of field research in the Mexican Caribbean led by{" "}
+              <a
+                href="https://www.marsustentable.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                Mar Sustentable
+              </a>
+              . What began as a project to document shark presence in Cozumel has evolved into open infrastructure for biodiversity data.
             </p>
             <p>
-              We are a mission-driven initiative building open infrastructure to map and protect life across all ecosystems, uniting science, community, and technology.
+              The research uses fishers&apos; Local Ecological Knowledge alongside geospatial tools to document shark diversity across coral reef and mangrove habitats. BiodiversityOS is the open data infrastructure built on top of this fieldwork.
             </p>
           </div>
         </div>

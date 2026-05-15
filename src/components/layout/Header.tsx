@@ -31,17 +31,17 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className={styles.navigation} aria-label="Main navigation">
-          <Link href="/about" className={styles.navLink}>
+          <Link href="#about" className={styles.navLink}>
             About
           </Link>
-          <Link href="/features" className={styles.navLink}>
-            Features
+          <Link href="#map" className={styles.navLink}>
+            Map
           </Link>
-          <Link href="/species" className={styles.navLink}>
-            Species
+          <Link href="#tech" className={styles.navLink}>
+            Technology
           </Link>
-          <Link href="/blog" className={styles.navLink}>
-            Blog
+          <Link href="#who-is-it-for" className={styles.navLink}>
+            Community
           </Link>
         </nav>
 
@@ -49,6 +49,7 @@ export default function Header() {
           <Link
             href="https://app.biodiversityos.org/"
             target="_blank"
+            rel="noopener noreferrer"
             className={styles.btnOutline}
           >
             Explore the Map
@@ -56,6 +57,7 @@ export default function Header() {
           <Link
             href="https://app.biodiversityos.org/"
             target="_blank"
+            rel="noopener noreferrer"
             className={styles.btnPrimary}
           >
             Report a Sighting
@@ -84,44 +86,48 @@ export default function Header() {
       >
         <nav className={styles.mobileNav} aria-label="Mobile navigation">
           <Link
-            href="/about"
+            href="#about"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
             About
           </Link>
           <Link
-            href="/features"
+            href="#map"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
-            Features
+            Map
           </Link>
           <Link
-            href="/species"
+            href="#tech"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
-            Species
+            Technology
           </Link>
           <Link
-            href="/blog"
+            href="#who-is-it-for"
             className={styles.mobileNavLink}
             onClick={() => setIsMenuOpen(false)}
           >
-            Blog
+            Community
           </Link>
 
           <div className={styles.mobileActions}>
             <Link
-              href="#map"
+              href="https://app.biodiversityos.org/"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.mobileBtnOutline}
               onClick={() => setIsMenuOpen(false)}
             >
               Explore the Map
             </Link>
             <Link
-              href="#report"
+              href="https://app.biodiversityos.org/"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.mobileBtnPrimary}
               onClick={() => setIsMenuOpen(false)}
             >

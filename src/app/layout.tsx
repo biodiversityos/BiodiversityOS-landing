@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,24 +11,25 @@ const inter = Inter({
 const siteUrl = "https://biodiversityos.org";
 const siteName = "BiodiversityOS";
 const siteTitle =
-  "BiodiversityOS — Open Marine Biodiversity Data Platform | Shark Tracking & Conservation";
+  "BiodiversityOS — Marine Biodiversity Data Platform";
 const siteDescription =
-  "Community-driven platform for collecting, structuring, and visualizing marine biodiversity data. Track shark sightings in Cozumel, explore interactive maps, and contribute to open conservation science.";
+  "Open platform for marine biodiversity data, built on field research in the Mexican Caribbean. Explore shark sightings in Cozumel, contribute observations, and access georeferenced species data.";
 const siteKeywords = [
   "biodiversity data platform",
   "marine biodiversity",
   "shark tracking",
   "shark sightings Cozumel",
+  "Cozumel shark research",
   "ocean conservation",
   "marine species monitoring",
   "biodiversity monitoring",
   "open science",
+  "open biodiversity data",
   "citizen science",
   "decentralized science",
   "DeSci",
   "marine ecosystem data",
-  "species identification",
-  "biodiversity intelligence",
+  "fisher ecological knowledge",
   "conservation technology",
   "ocean data visualization",
   "interactive biodiversity map",
@@ -38,8 +38,6 @@ const siteKeywords = [
   "community-driven conservation",
   "georeferenced biodiversity data",
   "marine research platform",
-  "wildlife observation app",
-  "marine conservation tools",
 ];
 
 export const viewport: Viewport = {
@@ -88,7 +86,7 @@ export const metadata: Metadata = {
         url: "/assets/ocean_bg_premium.png",
         width: 1200,
         height: 630,
-        alt: "BiodiversityOS — Marine Biodiversity Data Platform with interactive shark tracking map",
+        alt: "BiodiversityOS — Marine Biodiversity Data Platform",
         type: "image/png",
       },
     ],
@@ -132,10 +130,15 @@ function JsonLd() {
     url: siteUrl,
     logo: `${siteUrl}/assets/image.png`,
     description: siteDescription,
-    foundingDate: "2024",
     sameAs: [
+      "https://www.marsustentable.org",
       "https://app.biodiversityos.org",
     ],
+    parentOrganization: {
+      "@type": "Organization",
+      name: "Mar Sustentable",
+      url: "https://www.marsustentable.org",
+    },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Cozumel",
@@ -154,14 +157,6 @@ function JsonLd() {
     name: siteName,
     url: siteUrl,
     description: siteDescription,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 
   const softwareSchema = {
@@ -182,10 +177,9 @@ function JsonLd() {
       "Interactive biodiversity map",
       "Real-time shark sighting tracking",
       "Temporal data filtering",
-      "Species identification tools",
-      "Behavioral analysis",
       "Community verification system",
       "Georeferenced data exports",
+      "Sighting submission",
     ],
   };
 
@@ -194,11 +188,13 @@ function JsonLd() {
     "@type": "ResearchProject",
     name: "BiodiversityOS Marine Biodiversity Initiative",
     description:
-      "Field research initiative documenting shark presence and marine biodiversity in the Mexican Caribbean, led by Mar Sustentable.",
+      "Field research documenting shark presence and marine biodiversity in the Mexican Caribbean, ongoing since 2015. Led by Mar Sustentable using fishers' Local Ecological Knowledge and geospatial methods.",
     url: siteUrl,
+    startDate: "2015",
     funder: {
       "@type": "Organization",
       name: "Mar Sustentable",
+      url: "https://www.marsustentable.org",
     },
     about: {
       "@type": "Thing",
@@ -249,9 +245,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         {children}
-        <Script
-          id="reveal-on-scroll"
-          strategy="afterInteractive"
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               const observerOptions = {
@@ -267,8 +261,12 @@ export default function RootLayout({
                 });
               }, observerOptions);
 
-              document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+              document.addEventListener('DOMContentLoaded', () => {
+                const elements = document.querySelectorAll('.reveal-on-scroll');
+                elements.forEach(el => observer.observe(el));
+              });
 
+              // Also handle dynamic content if needed
               const mutationObserver = new MutationObserver((mutations) => {
                 mutations.forEach(mutation => {
                   mutation.addedNodes.forEach(node => {
