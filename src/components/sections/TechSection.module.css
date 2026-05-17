@@ -1,106 +1,53 @@
-.section {
-  padding: clamp(4rem, 10vw, 8rem) 0;
-  background-color: #f8fbff;
-  overflow: hidden;
+.kicker {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--story-ink-muted);
+  margin-bottom: 1.25rem;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: clamp(3rem, 8vw, 5rem);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+.intro {
+  max-width: 680px;
+  margin-bottom: clamp(3.5rem, 8vw, 6rem);
 }
 
 .title {
-  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.waveIcon {
-  margin: 1.5rem 0;
-  display: flex;
-  justify-content: center;
+.lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
 }
 
-.steps {
+.pillars {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: clamp(3rem, 6vw, 5rem);
 }
 
-.stepCard {
-  background: white;
-  border-radius: 24px;
-  padding: 3rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.pillar {
+  max-width: 460px;
 }
 
-.stepCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  border-color: rgba(28, 77, 141, 0.1);
+.icon {
+  color: var(--story-ink);
+  opacity: 0.85;
+  margin-bottom: 1.25rem;
 }
 
-.iconWrapper {
-  margin-bottom: 2rem;
-}
-
-.iconCircle {
-  width: 80px;
-  height: 80px;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-5deg);
-  transition: transform 0.3s ease;
-}
-
-.stepCard:hover .iconCircle {
-  transform: rotate(0deg) scale(1.1);
-}
-
-.bgBlue { background-color: #E0F2FE; }
-.bgTeal { background-color: #E0F2F1; }
-.bgGreen { background-color: #E8F5E9; }
-
-.stepTitle {
-  font-size: 1.5rem;
+.pillarTitle {
+  font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--color-text-main);
+  margin-bottom: 0.75rem;
 }
 
-.stepDesc {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
+.pillarBody {
+  font-size: 1.05rem;
 }
 
-@media (min-width: 768px) {
-  .steps {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .steps {
+@media (min-width: 900px) {
+  .pillars {
     grid-template-columns: repeat(3, 1fr);
-  }
-  
-  .container {
-    padding: 0 4rem;
   }
 }

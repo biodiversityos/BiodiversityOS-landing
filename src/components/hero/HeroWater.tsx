@@ -36,8 +36,11 @@ const WaterEffect = () => {
       const x = pos.getX(i);
       const y = pos.getY(i);
       if (x > -24.5 && x < 24.5 && y > -14.5 && y < 14.5) {
+        // One-time mesh jitter for an organic water grid (intentional).
+        /* eslint-disable react-hooks/purity */
         pos.setX(i, x + (Math.random() - 0.5) * 0.08);
         pos.setY(i, y + (Math.random() - 0.5) * 0.08);
+        /* eslint-enable react-hooks/purity */
       }
     }
 

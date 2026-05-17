@@ -243,48 +243,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
       </head>
-      <body className="min-h-full flex flex-col">
-        {children}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-              };
-
-              const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                  }
-                });
-              }, observerOptions);
-
-              document.addEventListener('DOMContentLoaded', () => {
-                const elements = document.querySelectorAll('.reveal-on-scroll');
-                elements.forEach(el => observer.observe(el));
-              });
-
-              // Also handle dynamic content if needed
-              const mutationObserver = new MutationObserver((mutations) => {
-                mutations.forEach(mutation => {
-                  mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === 1 && node.classList.contains('reveal-on-scroll')) {
-                      observer.observe(node);
-                    }
-                    if (node.nodeType === 1) {
-                      node.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-                    }
-                  });
-                });
-              });
-
-              mutationObserver.observe(document.body, { childList: true, subtree: true });
-            `,
-          }}
-        />
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

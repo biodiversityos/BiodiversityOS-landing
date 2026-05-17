@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { GLTFLoader, MeshSurfaceSampler } from "three-stdlib";
+import type { MotionValue } from "framer-motion";
 
 interface SharkParticlesProps {
   /** Number of particles to render. High counts are supported (e.g. 10000). */
@@ -19,8 +20,36 @@ interface SharkParticlesProps {
   returnForce?: number;
   /** Friction applied to particle velocity. */
   friction?: number;
+  /**
+   * Page dive progress (0 = top/surface, 1 = bottom/abyss). Drives the
+   * scatter → assemble → swim → dissolve story instead of an in-view trigger.
+   */
+  progress?: MotionValue<number>;
+  /** Enable cursor repulsion (desktop only — disabled for reduced motion). */
+  interactive?: boolean;
+  /** Render a single static assembled silhouette with no simulation. */
+  staticAssembled?: boolean;
   /** Extra CSS classes for the container. */
   className?: string;
+}
+
+// Smooth 0..1 ramp.
+function smoothstep(edge0: number, edge1: number, x: number) {
+  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
+  return t * t * (3 - 2 * t);
+}
+
+/**
+ * How tightly particles hold the shark shape at a given dive progress:
+ *  - scattered near the surface (hero)
+ *  - assembles as the origin story arrives
+ *  - holds through the platform / open-data chapters
+ *  - dissolves into a sparse data cloud in the deep
+ */
+function cohesionFor(p: number) {
+  const assemble = smoothstep(0.13, 0.36, p);
+  const dissolve = 1 - smoothstep(0.7, 0.95, p);
+  return Math.min(assemble, dissolve);
 }
 
 export const SharkParticles: React.FC<SharkParticlesProps> = ({
@@ -31,9 +60,23 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
   mouseRepelForce = 0.3,
   returnForce = 0.01,
   friction = 0.9,
+  progress,
+  interactive = true,
+  staticAssembled = false,
   className = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef(0);
+
+  // Mirror the scroll MotionValue into a ref the rAF loop can read cheaply.
+  useEffect(() => {
+    if (!progress) return;
+    progressRef.current = progress.get();
+    const unsub = progress.on("change", (v) => {
+      progressRef.current = v;
+    });
+    return unsub;
+  }, [progress]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -94,12 +137,13 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
         }
 
         // We want to center the mesh and scale it so it looks good in the viewport
-        const mesh = targetMesh as any;
-        mesh.geometry.computeBoundingBox();
-        const boundingBox = mesh.geometry.boundingBox!;
+        const mesh = targetMesh as THREE.Mesh;
+        const geom = mesh.geometry as THREE.BufferGeometry;
+        geom.computeBoundingBox();
+        const boundingBox = geom.boundingBox!;
         const center = new THREE.Vector3();
         boundingBox.getCenter(center);
-        mesh.geometry.translate(-center.x, -center.y, -center.z);
+        geom.translate(-center.x, -center.y, -center.z);
 
         // Optionally compute scale to fit a standard size (e.g., radius of 4)
         const size = new THREE.Vector3();
@@ -107,14 +151,13 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
         const maxDim = Math.max(size.x, size.y, size.z);
         const desiredSize = 16; // Perfect size to fill canvas without clipping
         const scale = desiredSize / maxDim;
-        mesh.geometry.scale(scale, scale, scale);
+        geom.scale(scale, scale, scale);
 
-        // Rotate it to face nicely if needed (assuming standard side profile, might need adjustments based on the exact GLB)
-        // Usually, we want the shark moving left-to-right or right-to-left
-        mesh.geometry.rotateY(-Math.PI / 2);
+        // Rotate it to face nicely (standard side profile, swimming right-to-left)
+        geom.rotateY(-Math.PI / 2);
 
         // Shift it slightly to the right to avoid clipping on the left edge
-        mesh.geometry.translate(2.5, 0, 0);
+        geom.translate(2.5, 0, 0);
 
         // Create Surface Sampler
         const sampler = new MeshSurfaceSampler(mesh).build();
@@ -140,13 +183,19 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
 
           // Scatter particles wildly on load so they can assemble into the shark
           const spread = 40.0;
-          positions[ix] = samplePosition.x + (Math.random() - 0.5) * spread;
-          positions[iy] = samplePosition.y + (Math.random() - 0.5) * spread;
-          positions[iz] = samplePosition.z + (Math.random() - 0.5) * spread;
-
           basePositions[ix] = samplePosition.x;
           basePositions[iy] = samplePosition.y;
           basePositions[iz] = samplePosition.z;
+
+          if (staticAssembled) {
+            positions[ix] = samplePosition.x;
+            positions[iy] = samplePosition.y;
+            positions[iz] = samplePosition.z;
+          } else {
+            positions[ix] = samplePosition.x + (Math.random() - 0.5) * spread;
+            positions[iy] = samplePosition.y + (Math.random() - 0.5) * spread;
+            positions[iz] = samplePosition.z + (Math.random() - 0.5) * spread;
+          }
 
           chaos[ix] = (Math.random() - 0.5) * 2.0;
           chaos[iy] = (Math.random() - 0.5) * 2.0;
@@ -204,8 +253,13 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
         particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // Start animation once loaded
-        animate();
+        if (staticAssembled) {
+          // No simulation — render the assembled silhouette once.
+          particles.rotation.y = Math.PI / 8;
+          renderer.render(scene, camera);
+        } else {
+          animate();
+        }
       },
       undefined,
       (error) => {
@@ -234,22 +288,12 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
       targetMouse.y = -999;
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
+    if (interactive && !staticAssembled) {
+      container.addEventListener("mousemove", handleMouseMove);
+      container.addEventListener("mouseleave", handleMouseLeave);
+    }
 
-    // 4. Handle Intersection for Animation
-    let isVisible = false;
-    const intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          isVisible = true;
-        }
-      },
-      { threshold: 0.1 },
-    );
-    intersectionObserver.observe(container);
-
-    // 5. Handle Resize
+    // 4. Handle Resize
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
@@ -269,6 +313,9 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
 
           camera.updateProjectionMatrix();
           renderer.setSize(width, height);
+          if (staticAssembled && particles) {
+            renderer.render(scene, camera);
+          }
         }
       }
     });
@@ -282,6 +329,12 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
 
       const material = particles.material as THREE.ShaderMaterial;
       material.uniforms.uTime.value = clock.getElapsedTime();
+
+      const p = progressRef.current;
+      // 0 = scattered (surface), 1 = locked into the shark shape.
+      const cohesion = cohesionFor(p);
+      // Outward drift as the shark dissolves into the data cloud in the deep.
+      const disperse = smoothstep(0.7, 0.98, p);
 
       // Smooth mouse tracking
       if (targetMouse.x !== -999) {
@@ -355,11 +408,20 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
           }
         }
 
-        // 2. Return to Base Force (only triggers when user scrolls down to section)
-        if (isVisible) {
-          fx += (bx - px) * returnForce;
-          fy += (currentBy - py) * returnForce;
-          fz += (bz - pz) * returnForce;
+        // 2. Return-to-shape force, scaled by how cohesive the dive wants it.
+        if (cohesion > 0.001) {
+          const r = returnForce * cohesion;
+          fx += (bx - px) * r;
+          fy += (currentBy - py) * r;
+          fz += (bz - pz) * r;
+        }
+
+        // 3. Dissolve — drift outward into a sparse data cloud in the deep.
+        if (disperse > 0.001) {
+          const t = time * 0.5;
+          fx += Math.sin(t + chaos[ix] * 12.0) * 0.012 * disperse;
+          fy += Math.cos(t + chaos[iy] * 12.0) * 0.012 * disperse;
+          fz += Math.sin(t + chaos[iz] * 12.0) * 0.012 * disperse;
         }
 
         // Apply forces to velocity
@@ -380,19 +442,21 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
 
       particles.geometry.attributes.position.needsUpdate = true;
 
-      // Gentle floating rotation of the entire system
-      particles.rotation.y =
-        Math.sin(clock.getElapsedTime() * 0.2) * 0.05 + Math.PI / 8; // Slightly angled towards user
-      particles.rotation.x = Math.cos(clock.getElapsedTime() * 0.15) * 0.02;
+      // Gentle swim: the whole shark drifts and banks as the dive progresses.
+      const t = clock.getElapsedTime();
+      particles.position.x = Math.sin(t * 0.15) * 0.6 - p * 1.2;
+      particles.position.y = Math.sin(t * 0.3) * 0.25;
+      particles.rotation.y = Math.sin(t * 0.2) * 0.05 + Math.PI / 8;
+      particles.rotation.x = Math.cos(t * 0.15) * 0.02;
+      particles.rotation.z = Math.sin(t * 0.12) * 0.03;
 
       renderer.render(scene, camera);
     };
 
-    // 7. Cleanup
+    // 6. Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
-      intersectionObserver.disconnect();
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", handleMouseLeave);
 
@@ -413,12 +477,14 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
     mouseRepelForce,
     returnForce,
     friction,
+    interactive,
+    staticAssembled,
   ]);
 
   return (
     <div
       ref={containerRef}
-      className={`w-full h-full min-h-[300px] cursor-crosshair ${className}`}
+      className={`w-full h-full ${className}`}
       style={{ overflow: "hidden" }}
     />
   );

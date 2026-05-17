@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import StoryShell from "@/components/story/StoryShell";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
@@ -6,8 +7,7 @@ import AppSection from "@/components/sections/AppSection";
 import TechSection from "@/components/sections/TechSection";
 import WhoIsItForSection from "@/components/sections/WhoIsItForSection";
 import AboutSection from "@/components/sections/AboutSection";
-import SupportSection from "@/components/sections/SupportSection";
-import CTABanner from "@/components/seo/CTABanner";
+import CtaSection from "@/components/sections/CtaSection";
 
 export const metadata: Metadata = {
   title:
@@ -21,26 +21,19 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
+    <StoryShell>
       <Header />
 
-      <main className="flex-1 w-full overflow-hidden" role="main">
+      <main className="relative z-0 flex-1 w-full overflow-hidden" role="main">
         <HeroSection />
-
         <AboutSection />
-
         <AppSection />
-
         <TechSection />
-
         <WhoIsItForSection />
-
-        <SupportSection />
-
-        <CTABanner />
+        <CtaSection />
       </main>
 
       <Footer />
-    </>
+    </StoryShell>
   );
 }

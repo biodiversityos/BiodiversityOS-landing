@@ -10,9 +10,18 @@
   --color-bg-white: #FFFFFF;
 }
 
+:root {
+  /* Safe defaults for non-home pages; the home page's StoryShell overrides
+     these live as it dives from the sunlit surface to the abyss. */
+  --story-ink: #0F2854;
+  --story-ink-muted: #4988C4;
+  --story-glow: #ffffff;
+  --story-glow-a: 0;
+}
+
 body {
   background: var(--color-bg-white);
-  color: var(--color-text-main);
+  color: var(--story-ink);
   font-family: var(--font-sans);
   margin: 0;
   padding: 0;
@@ -20,85 +29,84 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Base utility classes for typography */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--color-text-main);
+  color: var(--story-ink);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  transition: color 0.4s ease;
+  text-shadow: 0 0 22px
+    color-mix(
+      in srgb,
+      var(--story-glow) calc(var(--story-glow-a) * 100%),
+      transparent
+    );
 }
 
 h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); }
-h2 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(2rem, 6vw, 3.5rem); }
 h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
 
 p {
-  color: var(--color-text-muted);
-  line-height: 1.6;
+  color: var(--story-ink-muted);
+  line-height: 1.7;
+  transition: color 0.4s ease;
+  text-shadow: 0 0 18px
+    color-mix(
+      in srgb,
+      var(--story-glow) calc(var(--story-glow-a) * 100%),
+      transparent
+    );
 }
 
-.container-custom {
+/* One narrative — chapters share the same flowing water, never a box. */
+.chapter {
+  position: relative;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: clamp(7rem, 16vh, 12rem) 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .container-custom {
-    padding: 0 2rem;
+  .chapter {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .container-custom {
-    padding: 0 4rem;
+  .chapter {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
 @layer utilities {
-  .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal-on-scroll.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   .btn-primary {
-    @apply bg-[var(--color-primary)] text-white font-medium rounded-lg hover:bg-[var(--color-primary-hover)] transition-colors inline-flex items-center justify-center;
+    @apply bg-[var(--color-primary)] text-white font-medium rounded-full hover:bg-[var(--color-primary-hover)] transition-colors inline-flex items-center justify-center;
   }
 
-  .btn-outline {
-    @apply bg-white text-[var(--color-primary)] border border-gray-200 font-medium rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center;
-  }
-
-  /* --- Фоновые анимации --- */
-  
-  /* 1. Mesh Gradients (Океанический свет) */
+  /* Surface light (god rays / caustics parallax in StoryBackground) */
   @keyframes blob {
     0% { transform: translate(0px, 0px) scale(1); }
     33% { transform: translate(30px, -50px) scale(1.1); }
     66% { transform: translate(-20px, 20px) scale(0.9); }
     100% { transform: translate(0px, 0px) scale(1); }
   }
-  
+
   .animate-blob {
-    animation: blob 15s infinite alternate ease-in-out;
+    animation: blob 18s infinite alternate ease-in-out;
   }
-  
+
   .animation-delay-2000 {
     animation-delay: 2s;
   }
-  
+
   .animation-delay-4000 {
     animation-delay: 4s;
   }
 
-  /* 2. Topography (Морская топография) */
   @keyframes topo-pan {
     0% { transform: translate(0, 0); }
     100% { transform: translate(-400px, -400px); }
@@ -107,16 +115,11 @@ p {
   .animate-topo-pan {
     animation: topo-pan 40s linear infinite;
   }
+}
 
-  /* 3. Tech Grid (Операционная система) */
-  @keyframes scanline {
-    0% { transform: translateY(-100px); opacity: 0; }
-    10% { opacity: 0.5; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(100vh); opacity: 0; }
-  }
-
-  .animate-scanline {
-    animation: scanline 8s linear infinite;
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-topo-pan {
+    animation: none;
   }
 }

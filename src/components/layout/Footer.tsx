@@ -32,11 +32,19 @@ export default function Footer() {
           </div>
 
           <nav className={styles.nav} aria-label="Footer navigation">
-            <Link href="#hero">Home</Link>
-            <Link href="#about">About</Link>
-            <Link href="#map">Map Explorer</Link>
-            <Link href="#tech">Technology</Link>
-            <Link href="#who-is-it-for">Community</Link>
+            <Link href="/">Home</Link>
+            <Link href="/about">About</Link>
+            <Link href="/features">Features</Link>
+            <Link href="/species">Species</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/faq">FAQ</Link>
+            <a
+              href="https://app.biodiversityos.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Map Explorer
+            </a>
           </nav>
         </div>
       </div>
