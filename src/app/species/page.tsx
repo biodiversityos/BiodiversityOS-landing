@@ -32,14 +32,12 @@ export interface SpeciesData {
   commonName: string;
   scientificName: string;
   iucnStatus: string;
-  iucnColor: string;
   maxLength: string;
   habitat: string;
   diet: string;
   description: string;
   behavior: string;
   frequency: "Common" | "Occasional" | "Rare" | "Very Rare";
-  emoji: string;
 }
 
 export const speciesData: SpeciesData[] = [
@@ -48,7 +46,6 @@ export const speciesData: SpeciesData[] = [
     commonName: "Caribbean Reef Shark",
     scientificName: "Carcharhinus perezi",
     iucnStatus: "Endangered",
-    iucnColor: "#DC2626",
     maxLength: "3.0 m (10 ft)",
     habitat: "Coral reefs, reef edges, drop-offs",
     diet: "Reef fish, cephalopods, crustaceans",
@@ -57,14 +54,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Often seen patrolling reef walls and channels. Generally calm around divers but can be curious. Most active during dawn and dusk hunting periods. Known to form loose aggregations at cleaning stations.",
     frequency: "Common",
-    emoji: "🦈",
   },
   {
     slug: "nurse-shark",
     commonName: "Nurse Shark",
     scientificName: "Ginglymostoma cirratum",
     iucnStatus: "Vulnerable",
-    iucnColor: "#EA580C",
     maxLength: "4.3 m (14 ft)",
     habitat: "Sandy bottoms, coral crevices, mangroves",
     diet: "Bottom-dwelling fish, shrimp, squid, sea urchins",
@@ -73,14 +68,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Nocturnal hunters that rest in groups during daytime, often stacking on top of each other in caves and under ledges. Generally very docile but should not be disturbed. Use barbels near mouth to detect prey.",
     frequency: "Common",
-    emoji: "🦈",
   },
   {
     slug: "bull-shark",
     commonName: "Bull Shark",
     scientificName: "Carcharhinus leucas",
     iucnStatus: "Vulnerable",
-    iucnColor: "#EA580C",
     maxLength: "3.4 m (11 ft)",
     habitat: "Coastal waters, river mouths, deep channels",
     diet: "Fish, rays, other sharks, turtles, dolphins",
@@ -89,14 +82,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Territorial and solitary. Known for seasonal migrations to Cozumel waters, typically between November and March. Tend to patrol deeper channels and walls. Among the most powerful shark species encountered in the region.",
     frequency: "Occasional",
-    emoji: "🦈",
   },
   {
     slug: "whale-shark",
     commonName: "Whale Shark",
     scientificName: "Rhincodon typus",
     iucnStatus: "Endangered",
-    iucnColor: "#DC2626",
     maxLength: "18.8 m (62 ft)",
     habitat: "Open ocean, coastal feeding areas",
     diet: "Plankton, small fish, fish eggs",
@@ -105,14 +96,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Filter feeders that swim slowly near the surface. Gather in large aggregations during feeding events. Completely harmless to humans. Known for their distinctive spotted pattern unique to each individual, used for photo-identification.",
     frequency: "Occasional",
-    emoji: "🐋",
   },
   {
     slug: "great-hammerhead",
     commonName: "Great Hammerhead Shark",
     scientificName: "Sphyrna mokarran",
     iucnStatus: "Critically Endangered",
-    iucnColor: "#991B1B",
     maxLength: "6.1 m (20 ft)",
     habitat: "Coastal-pelagic, deep channels, continental shelves",
     diet: "Stingrays, groupers, other sharks, cephalopods",
@@ -121,14 +110,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Solitary and nomadic. Uses its cephalofoil (head) to pin stingrays to the ocean floor. Highly sensitive to electromagnetic fields produced by prey. Encounters are rare and considered a privilege by divers.",
     frequency: "Rare",
-    emoji: "🔨",
   },
   {
     slug: "blacktip-shark",
     commonName: "Blacktip Shark",
     scientificName: "Carcharhinus limbatus",
     iucnStatus: "Vulnerable",
-    iucnColor: "#EA580C",
     maxLength: "2.8 m (9 ft)",
     habitat: "Shallow coastal waters, bays, estuaries",
     diet: "Schooling fish, sardines, herring, mullet",
@@ -137,14 +124,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Active and fast-swimming. Often seen in small groups hunting schooling fish. Known for spinning jumps out of the water during feeding frenzies. Tend to be shy around divers but can be curious in feeding situations.",
     frequency: "Occasional",
-    emoji: "🦈",
   },
   {
     slug: "lemon-shark",
     commonName: "Lemon Shark",
     scientificName: "Negaprion brevirostris",
     iucnStatus: "Vulnerable",
-    iucnColor: "#EA580C",
     maxLength: "3.4 m (11 ft)",
     habitat: "Mangroves, shallow bays, coral reefs",
     diet: "Fish, rays, crustaceans, seabirds",
@@ -153,14 +138,12 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Social sharks that often form groups. Juveniles heavily depend on mangrove nurseries for protection. Adults are generally docile but can be defensive if provoked. Studied extensively for their social behavior.",
     frequency: "Rare",
-    emoji: "🍋",
   },
   {
     slug: "tiger-shark",
     commonName: "Tiger Shark",
     scientificName: "Galeocerdo cuvier",
     iucnStatus: "Near Threatened",
-    iucnColor: "#D97706",
     maxLength: "5.5 m (18 ft)",
     habitat: "Coastal-pelagic, deep channels, open ocean",
     diet: "Sea turtles, fish, seals, birds, almost anything",
@@ -169,7 +152,6 @@ export const speciesData: SpeciesData[] = [
     behavior:
       "Primarily nocturnal hunters with an extremely varied diet. Known as 'garbage cans of the sea' due to their willingness to eat almost anything. Solitary and wide-ranging, they may pass through Cozumel waters during migrations.",
     frequency: "Very Rare",
-    emoji: "🐅",
   },
 ];
 
@@ -201,25 +183,6 @@ function SpeciesJsonLd() {
   );
 }
 
-function FrequencyBadge({ frequency }: { frequency: string }) {
-  const colors: Record<string, { bg: string; color: string }> = {
-    Common: { bg: "#ECFDF5", color: "#059669" },
-    Occasional: { bg: "#FFF7ED", color: "#EA580C" },
-    Rare: { bg: "#FEF2F2", color: "#DC2626" },
-    "Very Rare": { bg: "#F5F3FF", color: "#6D28D9" },
-  };
-  const style = colors[frequency] || colors["Rare"];
-
-  return (
-    <span
-      className={styles.frequencyBadge}
-      style={{ background: style.bg, color: style.color }}
-    >
-      {frequency}
-    </span>
-  );
-}
-
 export default function SpeciesPage() {
   return (
     <>
@@ -228,65 +191,54 @@ export default function SpeciesPage() {
       <main className="flex-1 w-full" role="main">
         <PageHero
           eyebrow="Species Guide"
-          title="Shark Species of Cozumel & the Caribbean"
-          description="Explore the shark species documented through BiodiversityOS field research. Learn identification features, conservation status, and behavioral patterns."
+          title="Shark species of Cozumel & the Caribbean"
+          description="The shark species documented through BiodiversityOS field research — identification features, conservation status, and behavioral patterns."
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Species Guide" },
           ]}
         />
 
-        <section className={styles.speciesSection}>
-          <div className={styles.speciesGrid}>
-            {speciesData.map((species) => (
-              <Link
-                key={species.slug}
-                href={`/species/${species.slug}`}
-                className={styles.speciesCard}
-              >
-                <div className={styles.cardHeader}>
-                  <span className={styles.speciesEmoji}>{species.emoji}</span>
-                  <div>
-                    <FrequencyBadge frequency={species.frequency} />
-                    <span
-                      className={styles.iucnBadge}
-                      style={{
-                        background: `${species.iucnColor}15`,
-                        color: species.iucnColor,
-                      }}
-                    >
-                      {species.iucnStatus}
+        <section className="edSection">
+          <div className="ed edWide">
+            <div className={styles.grid}>
+              {speciesData.map((species) => (
+                <Link
+                  key={species.slug}
+                  href={`/species/${species.slug}`}
+                  className={styles.entry}
+                >
+                  <h2 className={styles.name}>{species.commonName}</h2>
+                  <p className={styles.sci}>{species.scientificName}</p>
+                  <p className={styles.desc}>
+                    {species.description.slice(0, 150)}…
+                  </p>
+                  <div className={styles.meta}>
+                    <span>
+                      IUCN{" "}
+                      <span className={styles.metaStrong}>
+                        {species.iucnStatus}
+                      </span>
                     </span>
+                    <span>
+                      <span className={styles.metaStrong}>
+                        {species.frequency}
+                      </span>{" "}
+                      in Cozumel
+                    </span>
+                    <span>{species.maxLength}</span>
                   </div>
-                </div>
-
-                <h2 className={styles.speciesName}>{species.commonName}</h2>
-                <p className={styles.scientificName}>
-                  {species.scientificName}
-                </p>
-                <p className={styles.speciesDesc}>{species.description.slice(0, 150)}...</p>
-
-                <div className={styles.speciesStats}>
-                  <div className={styles.stat}>
-                    <span className={styles.statLabel}>Max Length</span>
-                    <span className={styles.statValue}>{species.maxLength}</span>
-                  </div>
-                  <div className={styles.stat}>
-                    <span className={styles.statLabel}>Habitat</span>
-                    <span className={styles.statValue}>{species.habitat}</span>
-                  </div>
-                </div>
-
-                <span className={styles.readMore}>
-                  View Full Profile →
-                </span>
-              </Link>
-            ))}
+                  <span className="linkArrow">
+                    View full profile <span aria-hidden>→</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
         <CTABanner
-          title="Spotted a Shark in Cozumel?"
+          title="Spotted a shark in Cozumel?"
           description="Report your sighting on BiodiversityOS and contribute to marine conservation research."
           primaryLabel="Report a Sighting"
           primaryHref="https://app.biodiversityos.org/"

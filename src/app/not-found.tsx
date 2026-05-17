@@ -18,112 +18,36 @@ export default function NotFound() {
     <>
       <Header />
       <main
-        className="flex-1 w-full flex items-center justify-center"
+        className="flex-1 w-full flex items-center"
         role="main"
-        style={{
-          minHeight: "70vh",
-          background:
-            "linear-gradient(180deg, #BDE8F5 0%, #FFFFFF 50%, #F0F9FF 100%)",
-        }}
+        style={{ minHeight: "70vh", background: "#ffffff" }}
       >
-        <div
-          style={{
-            textAlign: "center",
-            padding: "4rem 2rem",
-            maxWidth: "600px",
-          }}
-        >
-          {/* Animated wave decoration */}
-          <div
-            style={{
-              fontSize: "6rem",
-              lineHeight: 1,
-              marginBottom: "1.5rem",
-              filter: "drop-shadow(0 4px 12px rgba(28,77,141,0.15))",
-            }}
-          >
-            🌊
-          </div>
-
-          <h1
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              fontWeight: 800,
-              color: "#0F2854",
-              marginBottom: "1rem",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Lost at Sea
-          </h1>
-
-          <p
-            style={{
-              fontSize: "1.125rem",
-              color: "#4988C4",
-              lineHeight: 1.6,
-              marginBottom: "2.5rem",
-            }}
-          >
+        <div className="ed" style={{ padding: "5rem 1.5rem" }}>
+          <p className="eyebrow">Error 404</p>
+          <h1 className="edTitle">Lost at sea</h1>
+          <p className="lede" style={{ marginBottom: "2.5rem" }}>
             The page you&apos;re looking for has drifted away. Let&apos;s
             navigate you back to charted waters.
           </p>
 
           <div
-            style={{
-              display: "flex",
-              gap: "1rem",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
+            style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
           >
-            <Link
-              href="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.875rem 2rem",
-                background: "#1C4D8D",
-                color: "white",
-                borderRadius: "0.75rem",
-                fontWeight: 600,
-                fontSize: "1rem",
-                textDecoration: "none",
-                transition: "all 0.2s ease",
-                boxShadow: "0 4px 14px rgba(28,77,141,0.3)",
-              }}
-            >
-              ← Back to Home
+            <Link href="/" className="btnSolid">
+              ← Back to home
             </Link>
-            <Link
-              href="/species"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.875rem 2rem",
-                background: "white",
-                color: "#1C4D8D",
-                borderRadius: "0.75rem",
-                fontWeight: 600,
-                fontSize: "1rem",
-                textDecoration: "none",
-                border: "1px solid #E2E8F0",
-                transition: "all 0.2s ease",
-              }}
-            >
-              Explore Species
+            <Link href="/species" className="btnGhost">
+              Explore species
             </Link>
           </div>
 
-          {/* Quick links */}
           <nav
             style={{
               marginTop: "3rem",
+              paddingTop: "2rem",
+              borderTop: "1px solid rgba(15,40,84,0.1)",
               display: "flex",
               gap: "2rem",
-              justifyContent: "center",
               flexWrap: "wrap",
             }}
             aria-label="Quick navigation"
@@ -138,12 +62,10 @@ export default function NotFound() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  color: "#4988C4",
+                  color: "var(--story-ink-muted,#4988c4)",
                   textDecoration: "none",
-                  fontSize: "0.9rem",
+                  fontSize: "0.95rem",
                   fontWeight: 500,
-                  borderBottom: "1px solid transparent",
-                  transition: "border-color 0.2s ease",
                 }}
               >
                 {link.label}

@@ -30,7 +30,6 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   category: string;
-  categoryColor: string;
   date: string;
   readTime: string;
   author: string;
@@ -44,7 +43,6 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Discover how local divers, fishers, and community members in Cozumel are contributing to groundbreaking shark research through BiodiversityOS — and how you can join the effort.",
     category: "Conservation",
-    categoryColor: "#059669",
     date: "2026-04-15",
     readTime: "8 min read",
     author: "BiodiversityOS Team",
@@ -56,7 +54,6 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Analysis of over 500 shark sightings in the Mexican Caribbean reveals fascinating behavioral patterns, seasonal migrations, and insights into reef shark ecology.",
     category: "Research",
-    categoryColor: "#2563EB",
     date: "2026-03-28",
     readTime: "12 min read",
     author: "BiodiversityOS Team",
@@ -67,7 +64,6 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "A deep dive into how BiodiversityOS uses Next.js, interactive mapping, and decentralized science technologies to create a transparent, community-driven biodiversity platform.",
     category: "Technology",
-    categoryColor: "#7C3AED",
     date: "2026-03-10",
     readTime: "10 min read",
     author: "BiodiversityOS Team",
@@ -78,7 +74,6 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Learn how to identify common shark species in the Caribbean Sea with this comprehensive guide covering key features, distinguishing marks, and field tips for divers and snorkelers.",
     category: "Education",
-    categoryColor: "#EA580C",
     date: "2026-02-20",
     readTime: "15 min read",
     author: "BiodiversityOS Team",
@@ -89,7 +84,6 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Exploring the critical importance of open, accessible biodiversity data for conservation planning, climate adaptation, and scientific research — and how BiodiversityOS is leading the way.",
     category: "Conservation",
-    categoryColor: "#059669",
     date: "2026-02-05",
     readTime: "7 min read",
     author: "BiodiversityOS Team",
@@ -149,7 +143,7 @@ export default function BlogPage() {
       <main className="flex-1 w-full" role="main">
         <PageHero
           eyebrow="Blog & Insights"
-          title="Stories from the Ocean"
+          title="Stories from the ocean"
           description="Research updates, conservation insights, and technical deep-dives from the BiodiversityOS team."
           breadcrumbs={[
             { label: "Home", href: "/" },
@@ -157,58 +151,56 @@ export default function BlogPage() {
           ]}
         />
 
-        <section className={styles.blogSection}>
-          {/* Featured Post */}
-          {featured && (
-            <Link href={`/blog/${featured.slug}`} className={styles.featuredCard}>
-              <div className={styles.featuredContent}>
-                <div className={styles.featuredMeta}>
-                  <span
-                    className={styles.categoryBadge}
-                    style={{ background: `${featured.categoryColor}15`, color: featured.categoryColor }}
-                  >
-                    {featured.category}
-                  </span>
-                  <span className={styles.featuredLabel}>Featured</span>
+        <section className="edSection">
+          <div className="ed edWide">
+            {featured && (
+              <Link
+                href={`/blog/${featured.slug}`}
+                className={styles.featured}
+              >
+                <div className={styles.fHead}>
+                  <span className="tag">{featured.category}</span>
+                  <span className={styles.fLabel}>Featured</span>
                 </div>
-                <h2 className={styles.featuredTitle}>{featured.title}</h2>
-                <p className={styles.featuredExcerpt}>{featured.excerpt}</p>
-                <div className={styles.postMeta}>
+                <h2 className={styles.fTitle}>{featured.title}</h2>
+                <p className={styles.fExcerpt}>{featured.excerpt}</p>
+                <div className="metaRow" style={{ marginBottom: "1rem" }}>
                   <span>{formatDate(featured.date)}</span>
-                  <span>·</span>
+                  <span className="sep">·</span>
                   <span>{featured.readTime}</span>
                 </div>
-              </div>
-            </Link>
-          )}
+                <span className="linkArrow">
+                  Read article <span aria-hidden>→</span>
+                </span>
+              </Link>
+            )}
 
-          {/* Post Grid */}
-          <div className={styles.postsGrid}>
-            {rest.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.postCard}>
-                <div className={styles.postContent}>
-                  <span
-                    className={styles.categoryBadge}
-                    style={{ background: `${post.categoryColor}15`, color: post.categoryColor }}
-                  >
-                    {post.category}
-                  </span>
-                  <h3 className={styles.postTitle}>{post.title}</h3>
-                  <p className={styles.postExcerpt}>{post.excerpt}</p>
-                  <div className={styles.postMeta}>
+            <div className={styles.list}>
+              {rest.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className={styles.post}
+                >
+                  <div className={styles.pHead}>
+                    <span className="tag">{post.category}</span>
+                  </div>
+                  <h3 className={styles.pTitle}>{post.title}</h3>
+                  <p className={styles.pExcerpt}>{post.excerpt}</p>
+                  <div className="metaRow">
                     <span>{formatDate(post.date)}</span>
-                    <span>·</span>
+                    <span className="sep">·</span>
                     <span>{post.readTime}</span>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
         <CTABanner
-          title="Want to Stay Updated?"
-          description="Follow our blog for the latest marine conservation research and BiodiversityOS platform updates."
+          title="Want to stay updated?"
+          description="Follow our work for the latest marine conservation research and BiodiversityOS platform updates."
           primaryLabel="Explore the Map"
           primaryHref="https://app.biodiversityos.org/"
           secondaryLabel="View All Species"

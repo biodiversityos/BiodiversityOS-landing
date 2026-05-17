@@ -1,4 +1,12 @@
 import type { Metadata } from "next";
+import {
+  Microscope,
+  Waves,
+  Users,
+  Unlock,
+  Link2,
+  Sprout,
+} from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/seo/PageHero";
@@ -52,40 +60,55 @@ const timeline = [
 
 const values = [
   {
-    emoji: "🔬",
+    icon: Microscope,
     title: "Scientific Rigor",
     description:
       "Observations follow structured data schemas grounded in the field methodologies developed by Mar Sustentable over years of research in the Mexican Caribbean.",
   },
   {
-    emoji: "🌊",
+    icon: Waves,
     title: "Ocean First",
     description:
       "The platform exists to serve conservation. Every design decision prioritizes the usefulness and reliability of marine biodiversity data over growth metrics.",
   },
   {
-    emoji: "🤝",
+    icon: Users,
     title: "Community Knowledge",
     description:
       "Fishers, divers, and local observers hold ecological knowledge that formal research often misses. BiodiversityOS is designed to recognize and integrate these contributions.",
   },
   {
-    emoji: "🔓",
+    icon: Unlock,
     title: "Open Access",
     description:
       "Biodiversity observations collected through the platform are openly accessible for research, conservation planning, and public understanding.",
   },
   {
-    emoji: "🔗",
+    icon: Link2,
     title: "Attribution",
     description:
       "Contributors receive credit for their observations. Proper attribution is built into the data model — not an afterthought.",
   },
   {
-    emoji: "🌱",
+    icon: Sprout,
     title: "Long-Term Thinking",
     description:
       "Biodiversity records should outlast any single organization or funding cycle. The platform is designed with data permanence and accessibility as core requirements.",
+  },
+];
+
+const partners = [
+  {
+    name: "Mar Sustentable",
+    role: "Primary Research Partner",
+    desc: "Marine conservation organization leading field research in the Mexican Caribbean since 2015, using fishers' Local Ecological Knowledge and geospatial methods.",
+    url: "https://www.marsustentable.org",
+  },
+  {
+    name: "Club de los Tiburones México",
+    role: "Education & Outreach",
+    desc: "Shark conservation education program launched in 2021 with Save Our Seas Foundation support. Reached students across 10+ countries in Latin America and the Caribbean.",
+    url: null,
   },
 ];
 
@@ -142,56 +165,53 @@ export default function AboutPage() {
       <main className="flex-1 w-full" role="main">
         <PageHero
           eyebrow="Our Story"
-          title="From Cozumel's Reefs to a Global Vision"
-          description="BiodiversityOS was born from years of field research in the Mexican Caribbean. We're building open infrastructure to map and protect life across all ecosystems."
+          title="From Cozumel's reefs to open biodiversity data"
+          description="BiodiversityOS was born from years of field research in the Mexican Caribbean — open infrastructure to map and protect marine life."
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "About" },
           ]}
         />
 
-        {/* Mission Section */}
-        <section className={styles.missionSection}>
-          <div className={styles.missionContainer}>
-            <div className={styles.missionContent}>
-              <h2 className={styles.sectionTitle}>Our Mission</h2>
-              <p className={styles.missionText}>
-                BiodiversityOS provides open infrastructure for marine biodiversity data —
-                starting with shark observations in the Mexican Caribbean and designed to
-                grow through community participation.
-              </p>
-              <p className={styles.missionText}>
-                The platform is built on field research by{" "}
-                <a
-                  href="https://www.marsustentable.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "var(--color-primary)", textDecoration: "underline" }}
-                >
-                  Mar Sustentable
-                </a>
-                , whose work in the Mexican Caribbean has used fishers&apos; Local Ecological
-                Knowledge alongside geospatial tools since 2015. BiodiversityOS makes that
-                research approach scalable and open.
-              </p>
-            </div>
+        <section className="edSection">
+          <div className="ed prose">
+            <p className="eyebrow">Our Mission</p>
+            <h2 className="edTitle">Open infrastructure for marine biodiversity data</h2>
+            <p>
+              BiodiversityOS provides open infrastructure for marine
+              biodiversity data — starting with shark observations in the
+              Mexican Caribbean and designed to grow through community
+              participation.
+            </p>
+            <p>
+              The platform is built on field research by{" "}
+              <a
+                href="https://www.marsustentable.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Mar Sustentable
+              </a>
+              , whose work in the Mexican Caribbean has used fishers&apos;
+              Local Ecological Knowledge alongside geospatial tools since 2015.
+              BiodiversityOS makes that research approach scalable and open.
+            </p>
           </div>
         </section>
 
-        {/* Timeline */}
-        <section className={styles.timelineSection}>
-          <div className={styles.timelineContainer}>
-            <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "3rem" }}>
-              Our Journey
+        <section className="edSection">
+          <div className="ed edWide">
+            <p className="eyebrow">Our Journey</p>
+            <h2 className="edTitle" style={{ marginBottom: "2.5rem" }}>
+              A decade of field research
             </h2>
             <div className={styles.timeline}>
-              {timeline.map((item, index) => (
-                <div key={index} className={styles.timelineItem}>
-                  <div className={styles.timelineDot} />
-                  <div className={styles.timelineContent}>
-                    <span className={styles.timelineYear}>{item.year}</span>
-                    <h3 className={styles.timelineTitle}>{item.title}</h3>
-                    <p className={styles.timelineDesc}>{item.description}</p>
+              {timeline.map((item) => (
+                <div key={item.title} className={styles.tItem}>
+                  <span className={styles.tYear}>{item.year}</span>
+                  <div>
+                    <h3 className={styles.tTitle}>{item.title}</h3>
+                    <p className={styles.tDesc}>{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -199,66 +219,56 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Values */}
-        <section className={styles.valuesSection}>
-          <div className={styles.valuesContainer}>
-            <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "0.75rem" }}>
-              Our Values
+        <section className="edSection">
+          <div className="ed edWide">
+            <p className="eyebrow">Our Values</p>
+            <h2 className="edTitle" style={{ marginBottom: "2.5rem" }}>
+              The principles that guide what we build
             </h2>
-            <p className={styles.valuesSubtitle}>
-              The principles that guide everything we build
-            </p>
-            <div className={styles.valuesGrid}>
-              {values.map((value, index) => (
-                <article key={index} className={styles.valueCard}>
-                  <span className={styles.valueEmoji}>{value.emoji}</span>
-                  <h3 className={styles.valueTitle}>{value.title}</h3>
-                  <p className={styles.valueDesc}>{value.description}</p>
+            <div className="edList">
+              {values.map(({ icon: Icon, title, description }) => (
+                <article key={title} className="edEntry">
+                  <Icon
+                    className="edIcon"
+                    size={26}
+                    strokeWidth={1.5}
+                    aria-hidden
+                  />
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </div>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Research Foundation */}
-        <section className={styles.partnersSection}>
-          <div className={styles.partnersContainer}>
-            <h2 className={styles.sectionTitle} style={{ textAlign: "center", marginBottom: "0.75rem" }}>
-              Research Foundation
+        <section className="edSection">
+          <div className="ed edWide">
+            <p className="eyebrow">Research Foundation</p>
+            <h2 className="edTitle" style={{ marginBottom: "2.5rem" }}>
+              Built on verified field research
             </h2>
-            <p className={styles.valuesSubtitle}>
-              Built on verified field research, not assumptions
-            </p>
-            <div className={styles.partnersGrid}>
-              {[
-                {
-                  name: "Mar Sustentable",
-                  role: "Primary Research Partner",
-                  desc: "Marine conservation organization leading field research in the Mexican Caribbean since 2015, using fishers' Local Ecological Knowledge and geospatial methods.",
-                  url: "https://www.marsustentable.org",
-                },
-                {
-                  name: "Club de los Tiburones México",
-                  role: "Education & Outreach",
-                  desc: "Shark conservation education program launched in 2021 with Save Our Seas Foundation support. Reached students across 10+ countries in Latin America and the Caribbean.",
-                  url: null,
-                },
-              ].map((partner, i) => (
-                <div key={i} className={styles.partnerCard}>
-                  {partner.url ? (
-                    <a
-                      href={partner.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none", color: "inherit" }}
-                    >
-                      <h3 className={styles.partnerName} style={{ textDecoration: "underline" }}>{partner.name}</h3>
-                    </a>
-                  ) : (
-                    <h3 className={styles.partnerName}>{partner.name}</h3>
-                  )}
-                  <span className={styles.partnerRole}>{partner.role}</span>
-                  <p className={styles.partnerDesc}>{partner.desc}</p>
+            <div className={styles.partners}>
+              {partners.map((p) => (
+                <div key={p.name} className={styles.partner}>
+                  <h3 className={styles.partnerName}>
+                    {p.url ? (
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "inherit" }}
+                      >
+                        {p.name}
+                      </a>
+                    ) : (
+                      p.name
+                    )}
+                  </h3>
+                  <span className={styles.partnerRole}>{p.role}</span>
+                  <p className={styles.partnerDesc}>{p.desc}</p>
                 </div>
               ))}
             </div>

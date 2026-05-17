@@ -109,10 +109,10 @@ export default function FAQPage() {
         <FAQClient />
 
         <CTABanner
-          title="Still Have Questions?"
-          description="Reach out to our team — we're happy to help you get started with BiodiversityOS."
-          primaryLabel="Contact Us"
-          primaryHref="/contact"
+          title="Still have questions?"
+          description="Explore the platform or browse the species guide to learn more about marine biodiversity in the Mexican Caribbean."
+          primaryLabel="Open the Map"
+          primaryHref="https://app.biodiversityos.org/"
           secondaryLabel="Explore Features"
           secondaryHref="/features"
         />

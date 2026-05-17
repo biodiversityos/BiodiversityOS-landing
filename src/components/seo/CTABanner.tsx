@@ -17,57 +17,39 @@ export default function CTABanner({
   secondaryLabel = "Learn More",
   secondaryHref = "/about",
 }: CTABannerProps) {
+  const isExternal = (href: string) => href.startsWith("http");
+
   return (
     <section
       style={{
-        background: "linear-gradient(135deg, #0F2854 0%, #1C4D8D 50%, #2563EB 100%)",
-        padding: "5rem 2rem",
-        textAlign: "center",
-        position: "relative",
-        overflow: "hidden",
+        background: "linear-gradient(180deg,#143A6B 0%,#0F2854 100%)",
+        padding: "clamp(3.5rem, 8vw, 6rem) 0",
       }}
     >
-      {/* Decorative waves */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.07,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      <div
-        style={{
-          maxWidth: "700px",
-          margin: "0 auto",
-          position: "relative",
-        }}
-      >
+      <div className="ed" style={{ textAlign: "center" }}>
         <h2
           style={{
-            fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
-            fontWeight: 800,
-            color: "white",
+            fontSize: "clamp(1.6rem, 3.4vw, 2.4rem)",
+            fontWeight: 700,
             letterSpacing: "-0.02em",
             lineHeight: 1.2,
-            marginBottom: "1rem",
+            color: "#EAF6FB",
+            margin: "0 0 1rem",
           }}
         >
           {title}
         </h2>
-
         <p
           style={{
-            fontSize: "1.1rem",
-            color: "rgba(255,255,255,0.8)",
-            lineHeight: 1.6,
-            marginBottom: "2.5rem",
+            fontSize: "1.05rem",
+            lineHeight: 1.7,
+            color: "#BDE8F5",
+            margin: "0 auto 2.5rem",
+            maxWidth: "52ch",
           }}
         >
           {description}
         </p>
-
         <div
           style={{
             display: "flex",
@@ -78,40 +60,37 @@ export default function CTABanner({
         >
           <Link
             href={primaryHref}
-            target={primaryHref.startsWith("http") ? "_blank" : undefined}
-            rel={primaryHref.startsWith("http") ? "noopener noreferrer" : undefined}
+            target={isExternal(primaryHref) ? "_blank" : undefined}
+            rel={isExternal(primaryHref) ? "noopener noreferrer" : undefined}
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "0.5rem",
-              padding: "1rem 2.5rem",
-              background: "white",
-              color: "#1C4D8D",
-              borderRadius: "0.75rem",
-              fontWeight: 700,
-              fontSize: "1rem",
+              padding: "0.9rem 2rem",
+              background: "#EAF6FB",
+              color: "#0F2854",
+              borderRadius: "999px",
+              fontWeight: 650,
+              fontSize: "0.95rem",
               textDecoration: "none",
-              transition: "all 0.2s ease",
-              boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
             }}
           >
             {primaryLabel}
           </Link>
           <Link
             href={secondaryHref}
+            target={isExternal(secondaryHref) ? "_blank" : undefined}
+            rel={isExternal(secondaryHref) ? "noopener noreferrer" : undefined}
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "0.5rem",
-              padding: "1rem 2.5rem",
+              padding: "0.9rem 2rem",
               background: "transparent",
-              color: "white",
-              borderRadius: "0.75rem",
+              color: "#EAF6FB",
+              borderRadius: "999px",
               fontWeight: 600,
-              fontSize: "1rem",
+              fontSize: "0.95rem",
               textDecoration: "none",
-              border: "2px solid rgba(255,255,255,0.3)",
-              transition: "all 0.2s ease",
+              border: "1px solid rgba(189,232,245,0.35)",
             }}
           >
             {secondaryLabel}

@@ -1,113 +1,24 @@
-.featuresSection {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem 5rem;
+.hi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
 }
-
-.featuresGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-}
-
-.featureCard {
-  background: white;
-  border: 1.5px solid #E8EFF5;
-  border-radius: 1.25rem;
-  padding: 2rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.hi li {
   position: relative;
-  overflow: hidden;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--story-ink-muted, #4988c4);
 }
-
-.featureCard::before {
+.hi li::before {
   content: "";
   position: absolute;
-  top: 0;
   left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #1C4D8D, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.featureCard:hover {
-  border-color: #C8DBEA;
-  box-shadow: 0 8px 32px rgba(28, 77, 141, 0.08);
-  transform: translateY(-4px);
-}
-
-.featureCard:hover::before {
-  opacity: 1;
-}
-
-.featureIcon {
-  width: 56px;
-  height: 56px;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-}
-
-.featureTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0F2854;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
-}
-
-.featureDesc {
-  font-size: 0.925rem;
-  line-height: 1.65;
-  color: #4988C4;
-  margin-bottom: 1.25rem;
-}
-
-.featureHighlights {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.featureHighlights li {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #0F2854;
-}
-
-.highlightDot {
-  width: 6px;
-  height: 6px;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .featuresSection {
-    padding: 2rem 1rem 3rem;
-  }
-
-  .featuresGrid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .featureCard {
-    padding: 1.5rem;
-  }
-
-  .featureCard:hover {
-    transform: none;
-  }
+  background: var(--color-primary);
 }

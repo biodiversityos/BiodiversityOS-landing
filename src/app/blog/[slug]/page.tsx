@@ -9,7 +9,6 @@ import { blogPosts } from "../page";
 
 type PageParams = { params: Promise<{ slug: string }> };
 
-// Full article content
 const articleContent: Record<string, string[]> = {
   "citizen-science-transforming-marine-conservation-cozumel": [
     "Citizen science — the involvement of non-professional observers in structured data collection — has become a significant tool in marine conservation. In the Mexican Caribbean, this approach is being applied to shark monitoring, where consistent, georeferenced observations can reveal patterns that short research expeditions cannot capture.",
@@ -95,7 +94,9 @@ export async function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return {};
@@ -177,175 +178,87 @@ export default async function BlogArticlePage({ params }: PageParams) {
       />
       <Header />
       <main className="flex-1 w-full" role="main">
-        {/* Article Header */}
-        <section
+        <header
           style={{
-            background: "linear-gradient(180deg, #E8F4FD 0%, #FFFFFF 100%)",
-            padding: "2rem 0 3rem",
+            background: "#ffffff",
+            padding: "1.5rem 0 clamp(2.5rem,6vw,4rem)",
+            borderBottom: "1px solid rgba(15,40,84,0.08)",
           }}
         >
-          <div style={{ maxWidth: "760px", margin: "0 auto", padding: "0 2rem" }}>
+          <div className="ed">
             <Breadcrumbs
               items={[
                 { label: "Home", href: "/" },
                 { label: "Blog", href: "/blog" },
-                { label: post.title.length > 50 ? post.title.slice(0, 50) + "..." : post.title },
+                {
+                  label:
+                    post.title.length > 50
+                      ? post.title.slice(0, 50) + "…"
+                      : post.title,
+                },
               ]}
             />
-
-            <div style={{ marginTop: "1.5rem" }}>
-              <span
-                style={{
-                  display: "inline-block",
-                  padding: "0.25rem 0.75rem",
-                  borderRadius: "1rem",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  background: `${post.categoryColor}15`,
-                  color: post.categoryColor,
-                  marginBottom: "1rem",
-                }}
-              >
-                {post.category}
-              </span>
-
-              <h1
-                style={{
-                  fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
-                  fontWeight: 800,
-                  color: "#0F2854",
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.15,
-                  marginBottom: "1rem",
-                }}
-              >
-                {post.title}
-              </h1>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  fontSize: "0.9rem",
-                  color: "#4988C4",
-                  flexWrap: "wrap",
-                }}
-              >
-                <span style={{ fontWeight: 600 }}>{post.author}</span>
-                <span style={{ color: "#CBD5E1" }}>·</span>
-                <span>{formatDate(post.date)}</span>
-                <span style={{ color: "#CBD5E1" }}>·</span>
-                <span>{post.readTime}</span>
-              </div>
+            <div style={{ marginTop: "1.75rem" }}>
+              <span className="tag">{post.category}</span>
+            </div>
+            <h1
+              className="edTitle"
+              style={{
+                fontSize: "clamp(1.9rem, 4.5vw, 3rem)",
+                margin: "1.1rem 0",
+              }}
+            >
+              {post.title}
+            </h1>
+            <div className="metaRow">
+              <span style={{ fontWeight: 600 }}>{post.author}</span>
+              <span className="sep">·</span>
+              <span>{formatDate(post.date)}</span>
+              <span className="sep">·</span>
+              <span>{post.readTime}</span>
             </div>
           </div>
-        </section>
+        </header>
 
-        {/* Article Content */}
-        <article
-          style={{
-            maxWidth: "760px",
-            margin: "0 auto",
-            padding: "3rem 2rem 4rem",
-          }}
-        >
-          {content.map((paragraph, i) => {
-            if (paragraph.startsWith("## ")) {
+        <article className="ed" style={{ padding: "0" }}>
+          <div
+            className="prose"
+            style={{ padding: "clamp(2.5rem,6vw,4rem) 1.5rem 0" }}
+          >
+            {content.map((paragraph, i) => {
+              if (paragraph.startsWith("## ")) {
+                return <h2 key={i}>{paragraph.replace("## ", "")}</h2>;
+              }
+              const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
               return (
-                <h2
-                  key={i}
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: 700,
-                    color: "#0F2854",
-                    marginTop: "2.5rem",
-                    marginBottom: "1rem",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {paragraph.replace("## ", "")}
-                </h2>
+                <p key={i}>
+                  {parts.map((part, j) =>
+                    part.startsWith("**") && part.endsWith("**") ? (
+                      <strong key={j}>{part.slice(2, -2)}</strong>
+                    ) : (
+                      <span key={j}>{part}</span>
+                    ),
+                  )}
+                </p>
               );
-            }
+            })}
+          </div>
 
-            if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-              return null; // Skip standalone bold lines (handled inline)
-            }
-
-            // Handle paragraphs with bold text
-            const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
-
-            return (
-              <p
-                key={i}
-                style={{
-                  fontSize: "1.1rem",
-                  lineHeight: 1.8,
-                  color: "#374151",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                {parts.map((part, j) => {
-                  if (part.startsWith("**") && part.endsWith("**")) {
-                    return (
-                      <strong key={j} style={{ color: "#0F2854", fontWeight: 600 }}>
-                        {part.slice(2, -2)}
-                      </strong>
-                    );
-                  }
-                  return <span key={j}>{part}</span>;
-                })}
-              </p>
-            );
-          })}
-
-          {/* Navigation */}
           <div
             style={{
-              marginTop: "3rem",
+              margin: "3rem 1.5rem 0",
               paddingTop: "2rem",
-              borderTop: "1px solid #E8EFF5",
+              borderTop: "1px solid rgba(15,40,84,0.1)",
+              paddingBottom: "clamp(3rem,7vw,5rem)",
               display: "flex",
               gap: "1rem",
               flexWrap: "wrap",
             }}
           >
-            <Link
-              href="/blog"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.75rem 1.5rem",
-                background: "white",
-                color: "#1C4D8D",
-                border: "1.5px solid #E2E8F0",
-                borderRadius: "0.75rem",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                textDecoration: "none",
-              }}
-            >
-              ← All Articles
+            <Link href="/blog" className="btnGhost">
+              ← All articles
             </Link>
-            <Link
-              href="/species"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.75rem 1.5rem",
-                background: "#1C4D8D",
-                color: "white",
-                borderRadius: "0.75rem",
-                fontWeight: 600,
-                fontSize: "0.9rem",
-                textDecoration: "none",
-              }}
-            >
+            <Link href="/species" className="btnSolid">
               Species Guide
             </Link>
           </div>

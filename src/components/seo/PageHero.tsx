@@ -5,7 +5,6 @@ interface PageHeroProps {
   title: string;
   description?: string;
   breadcrumbs: BreadcrumbItem[];
-  gradient?: string;
 }
 
 export default function PageHero({
@@ -13,85 +12,38 @@ export default function PageHero({
   title,
   description,
   breadcrumbs,
-  gradient = "linear-gradient(180deg, #E8F4FD 0%, #FFFFFF 100%)",
 }: PageHeroProps) {
   return (
-    <section
+    <header
       style={{
-        background: gradient,
-        padding: "2rem 0 4rem",
-        position: "relative",
-        overflow: "hidden",
+        background: "#ffffff",
+        padding: "1.5rem 0 clamp(2.5rem, 6vw, 4.5rem)",
+        borderBottom: "1px solid rgba(15,40,84,0.08)",
       }}
     >
-      {/* Subtle decorative element */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-50%",
-          right: "-20%",
-          width: "600px",
-          height: "600px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(28,77,141,0.04) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 2rem",
-          position: "relative",
-        }}
-      >
+      <div className="ed edWide">
         <Breadcrumbs items={breadcrumbs} />
-
         {eyebrow && (
-          <div
-            style={{
-              color: "#1C4D8D",
-              fontWeight: 600,
-              fontSize: "0.875rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              marginBottom: "0.75rem",
-              marginTop: "1.5rem",
-            }}
-          >
+          <p className="eyebrow" style={{ marginTop: "1.75rem" }}>
             {eyebrow}
-          </div>
+          </p>
         )}
-
         <h1
+          className="edTitle"
           style={{
             fontSize: "clamp(2rem, 5vw, 3.25rem)",
-            fontWeight: 800,
-            color: "#0F2854",
-            letterSpacing: "-0.02em",
-            lineHeight: 1.15,
-            marginBottom: description ? "1rem" : 0,
-            maxWidth: "800px",
+            maxWidth: "16ch",
+            marginBottom: description ? "1.25rem" : 0,
           }}
         >
           {title}
         </h1>
-
         {description && (
-          <p
-            style={{
-              fontSize: "1.125rem",
-              color: "#4988C4",
-              lineHeight: 1.6,
-              maxWidth: "640px",
-            }}
-          >
+          <p className="lede" style={{ maxWidth: "60ch" }}>
             {description}
           </p>
         )}
       </div>
-    </section>
+    </header>
   );
 }

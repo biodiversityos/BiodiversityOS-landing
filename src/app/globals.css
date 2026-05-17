@@ -87,6 +87,219 @@ p {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Editorial system — shared by the informational / SEO pages.
+   Clean, typographic, one ocean accent. No cards-rainbow, no emoji.
+--------------------------------------------------------------------------- */
+.ed {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.edWide {
+  max-width: 1080px;
+}
+@media (min-width: 768px) {
+  .ed {
+    padding: 0 2rem;
+  }
+}
+
+.edSection {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+}
+.edSection + .edSection {
+  border-top: 1px solid rgba(15, 40, 84, 0.08);
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0 0 1rem;
+}
+
+.edTitle {
+  font-size: clamp(1.65rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--story-ink, #0f2854);
+  margin: 0 0 1rem;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--story-ink-muted, #4988c4);
+  margin: 0;
+  max-width: 60ch;
+}
+
+.rule {
+  height: 1px;
+  border: 0;
+  background: rgba(15, 40, 84, 0.1);
+  margin: 0;
+}
+
+/* Long-form reading typography */
+.prose > * + * {
+  margin-top: 1.4rem;
+}
+.prose h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--story-ink, #0f2854);
+  margin-top: 3rem;
+}
+.prose p {
+  font-size: 1.075rem;
+  line-height: 1.85;
+  color: var(--story-ink-muted, #4988c4);
+}
+.prose strong {
+  color: var(--story-ink, #0f2854);
+  font-weight: 650;
+}
+.prose a {
+  color: var(--color-primary);
+  text-underline-offset: 3px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--story-ink-muted, #4988c4);
+}
+.metaRow .sep {
+  opacity: 0.4;
+}
+
+/* One uniform category/status label — no per-item colors */
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(28, 77, 141, 0.25);
+  border-radius: 999px;
+}
+
+.linkArrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.linkArrow span {
+  transition: transform 0.2s ease;
+}
+.linkArrow:hover span {
+  transform: translateX(4px);
+}
+
+.btnSolid,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btnSolid {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btnSolid:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+.btnGhost {
+  color: var(--color-primary);
+  border: 1px solid rgba(28, 77, 141, 0.3);
+}
+.btnGhost:hover {
+  background: rgba(28, 77, 141, 0.06);
+}
+
+/* Editorial entry list — icon (single color) + heading + text, hairlines */
+.edList {
+  display: grid;
+  gap: 0;
+}
+.edEntry {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 1.25rem;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(15, 40, 84, 0.1);
+}
+.edEntry:first-child {
+  border-top: 0;
+}
+.edEntry .edIcon {
+  color: var(--color-primary);
+  margin-top: 0.15rem;
+}
+.edEntry h2,
+.edEntry h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--story-ink, #0f2854);
+  margin: 0 0 0.5rem;
+}
+.edEntry p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--story-ink-muted, #4988c4);
+  margin: 0;
+}
+
+/* Clean key/value facts — no colored boxes */
+.defGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(15, 40, 84, 0.1);
+}
+.defGrid > div {
+  padding: 1.25rem 1.5rem 1.25rem 0;
+  border-bottom: 1px solid rgba(15, 40, 84, 0.1);
+}
+.defGrid dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--story-ink-muted, #4988c4);
+  margin-bottom: 0.4rem;
+}
+.defGrid dd {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--story-ink, #0f2854);
+}
+
 @layer utilities {
   .btn-primary {
     @apply bg-[var(--color-primary)] text-white font-medium rounded-full hover:bg-[var(--color-primary-hover)] transition-colors inline-flex items-center justify-center;

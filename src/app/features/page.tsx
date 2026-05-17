@@ -3,14 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageHero from "@/components/seo/PageHero";
 import CTABanner from "@/components/seo/CTABanner";
-import {
-  Map,
-  Filter,
-  Clock,
-  Users,
-  Download,
-  Shield,
-} from "lucide-react";
+import { Map, Filter, Clock, Users, Download, Shield } from "lucide-react";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -44,8 +37,6 @@ const features = [
       "Cozumel region focus",
       "Open map tiles (OpenStreetMap)",
     ],
-    color: "#2563EB",
-    bgColor: "#EFF6FF",
   },
   {
     icon: Filter,
@@ -58,8 +49,6 @@ const features = [
       "Date range selection",
       "Combined filter queries",
     ],
-    color: "#0D9488",
-    bgColor: "#F0FDFA",
   },
   {
     icon: Clock,
@@ -72,8 +61,6 @@ const features = [
       "Chronological sighting view",
       "Data coverage overview",
     ],
-    color: "#7C3AED",
-    bgColor: "#F5F3FF",
   },
   {
     icon: Users,
@@ -86,8 +73,6 @@ const features = [
       "Structured data schema",
       "Attribution tracking",
     ],
-    color: "#059669",
-    bgColor: "#ECFDF5",
   },
   {
     icon: Download,
@@ -100,8 +85,6 @@ const features = [
       "Citation-ready structure",
       "Open access downloads",
     ],
-    color: "#1C4D8D",
-    bgColor: "#EEF5FC",
   },
   {
     icon: Shield,
@@ -114,8 +97,6 @@ const features = [
       "Structured verification trail",
       "Long-term accessibility",
     ],
-    color: "#6D28D9",
-    bgColor: "#F5F3FF",
   },
 ];
 
@@ -153,7 +134,7 @@ export default function FeaturesPage() {
       <main className="flex-1 w-full" role="main">
         <PageHero
           eyebrow="Platform"
-          title="Tools for Marine Biodiversity Data"
+          title="Tools for marine biodiversity data"
           description="BiodiversityOS provides tools for submitting, exploring, and exporting marine biodiversity observations — built on open principles and grounded in field research."
           breadcrumbs={[
             { label: "Home", href: "/" },
@@ -161,39 +142,34 @@ export default function FeaturesPage() {
           ]}
         />
 
-        <section className={styles.featuresSection}>
-          <div className={styles.featuresGrid}>
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <article key={index} className={styles.featureCard}>
-                  <div
-                    className={styles.featureIcon}
-                    style={{ background: feature.bgColor }}
-                  >
-                    <Icon size={28} color={feature.color} strokeWidth={1.8} />
+        <section className="edSection">
+          <div className="ed edWide">
+            <div className="edList">
+              {features.map(({ icon: Icon, title, description, highlights }) => (
+                <article key={title} className="edEntry">
+                  <Icon
+                    className="edIcon"
+                    size={26}
+                    strokeWidth={1.5}
+                    aria-hidden
+                  />
+                  <div>
+                    <h2>{title}</h2>
+                    <p>{description}</p>
+                    <ul className={styles.hi}>
+                      {highlights.map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
                   </div>
-                  <h2 className={styles.featureTitle}>{feature.title}</h2>
-                  <p className={styles.featureDesc}>{feature.description}</p>
-                  <ul className={styles.featureHighlights}>
-                    {feature.highlights.map((h, i) => (
-                      <li key={i}>
-                        <span
-                          className={styles.highlightDot}
-                          style={{ background: feature.color }}
-                        />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
                 </article>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </section>
 
         <CTABanner
-          title="Ready to Dive In?"
+          title="Ready to dive in?"
           description="Start exploring real-time marine biodiversity data on our interactive map — it's free and open."
           primaryLabel="Open the Map"
           primaryHref="https://app.biodiversityos.org/"

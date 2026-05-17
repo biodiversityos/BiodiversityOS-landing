@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import {
   motion,
   useScroll,
@@ -8,6 +8,8 @@ import {
   useSpring,
   useReducedMotion,
 } from "framer-motion";
+
+const noopSubscribe = () => () => {};
 
 /**
  * Content rises out of the water as it enters the viewport — scroll-driven,
@@ -24,8 +26,11 @@ export default function Reveal({
   const reducedMotion = useReducedMotion() ?? false;
   // Render plain on the server / first paint so the SSR markup matches the
   // client (no hydration mismatch); attach scroll-driven motion after mount.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  );
 
   const { scrollYProgress } = useScroll({
     target: ref,
