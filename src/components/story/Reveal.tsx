@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -22,22 +22,26 @@ export default function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion() ?? false;
+  // Render plain on the server / first paint so the SSR markup matches the
+  // client (no hydration mismatch); attach scroll-driven motion after mount.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.92", "start 0.42"],
+    offset: ["start 0.95", "start 0.62"],
   });
   const eased = useSpring(scrollYProgress, {
-    stiffness: 55,
-    damping: 22,
+    stiffness: 90,
+    damping: 26,
     restDelta: 0.001,
   });
 
-  const opacity = useTransform(eased, [0, 1], [0, 1]);
-  const y = useTransform(eased, [0, 1], [70, 0]);
-  const blur = useTransform(eased, [0, 1], ["blur(8px)", "blur(0px)"]);
+  const opacity = useTransform(eased, [0, 0.5], [0, 1]);
+  const y = useTransform(eased, [0, 1], [48, 0]);
+  const blur = useTransform(eased, [0, 0.4], ["blur(6px)", "blur(0px)"]);
 
-  if (reducedMotion) {
+  if (reducedMotion || !mounted) {
     return <div className={className}>{children}</div>;
   }
 

@@ -40,9 +40,9 @@ export default function StoryBackground() {
         className="absolute inset-0"
         style={{
           opacity: "var(--story-surface, 1)",
-          transition: "opacity 0.15s linear",
+          transition: "opacity 0.5s cubic-bezier(0.4,0,0.2,1)",
           background:
-            "linear-gradient(180deg,#EAF6FB 0%,#CFEBF6 45%,#BDE8F5 75%,#A7DCEF 100%)",
+            "linear-gradient(180deg,#EFF8FC 0%,#E4F4FA 55%,#D2ECF6 100%)",
         }}
       />
 
@@ -50,9 +50,10 @@ export default function StoryBackground() {
       <div
         className="absolute inset-x-0 -top-1/4 h-[150%]"
         style={{
-          opacity: "var(--story-ray-a, 0.5)",
+          opacity: "var(--story-ray-a, 0.35)",
           transform: "translateY(var(--story-ray-y, 0%))",
-          transition: "opacity 0.15s linear, transform 0.15s linear",
+          transition:
+            "opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
         <div

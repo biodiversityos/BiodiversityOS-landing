@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import StoryBackground from "./StoryBackground";
+import StoryParticles from "./StoryParticles";
 import StoryShark from "./StoryShark";
 
 /**
@@ -37,9 +38,17 @@ export default function StoryShell({
   );
   const glowAlpha = useTransform(scrollYProgress, [0.26, 0.38, 0.5], [0, 0.6, 0]);
 
+  // Always-on faint halo opposite the ink — readable rim on bright surface
+  // AND in the deep, not only at the crossover.
+  const inkContrast = useTransform(
+    scrollYProgress,
+    [0, 0.34, 0.42, 1],
+    ["#FFFFFF", "#FFFFFF", "#06182F", "#06182F"],
+  );
+
   // Bright surface fades into the deep over a short, aligned window.
   const surface = useTransform(scrollYProgress, [0.32, 0.44], [1, 0]);
-  const rayAlpha = useTransform(scrollYProgress, [0, 0.28, 0.44], [0.5, 0.3, 0]);
+  const rayAlpha = useTransform(scrollYProgress, [0, 0.28, 0.44], [0.35, 0.22, 0]);
   const rayShift = useTransform(scrollYProgress, [0, 0.44], [0, 40]);
 
   // Shark: present while it forms, then recedes out of the text's way.
@@ -55,11 +64,22 @@ export default function StoryShell({
     r.style.setProperty("--story-ink-muted", inkMuted.get());
     r.style.setProperty("--story-glow", glowColor.get());
     r.style.setProperty("--story-glow-a", String(glowAlpha.get()));
+    r.style.setProperty("--story-ink-contrast", inkContrast.get());
     r.style.setProperty("--story-surface", String(surface.get()));
     r.style.setProperty("--story-ray-a", String(rayAlpha.get()));
     r.style.setProperty("--story-ray-y", `${rayShift.get()}%`);
     r.style.setProperty("--story-shark", String(shark.get()));
-  }, [ink, inkMuted, glowColor, glowAlpha, surface, rayAlpha, rayShift, shark]);
+  }, [
+    ink,
+    inkMuted,
+    glowColor,
+    glowAlpha,
+    inkContrast,
+    surface,
+    rayAlpha,
+    rayShift,
+    shark,
+  ]);
 
   const set = (name: string) => (v: string | number) =>
     document.documentElement.style.setProperty(name, String(v));
@@ -68,6 +88,7 @@ export default function StoryShell({
   useMotionValueEvent(inkMuted, "change", set("--story-ink-muted"));
   useMotionValueEvent(glowColor, "change", set("--story-glow"));
   useMotionValueEvent(glowAlpha, "change", set("--story-glow-a"));
+  useMotionValueEvent(inkContrast, "change", set("--story-ink-contrast"));
   useMotionValueEvent(surface, "change", set("--story-surface"));
   useMotionValueEvent(rayAlpha, "change", set("--story-ray-a"));
   useMotionValueEvent(rayShift, "change", (v) =>
@@ -78,6 +99,7 @@ export default function StoryShell({
   return (
     <>
       <StoryBackground />
+      <StoryParticles />
       <StoryShark />
       {children}
     </>

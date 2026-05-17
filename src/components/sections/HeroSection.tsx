@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./HeroSection.module.css";
-import HeroWater from "../hero/HeroWater";
 import SharkIcon from "../ui/SharkIcon";
 
 export default function HeroSection() {
@@ -10,9 +9,6 @@ export default function HeroSection() {
       className={styles.hero}
       aria-label="BiodiversityOS — Community-Driven Marine Biodiversity Platform"
     >
-      {/* Surface ripples — the water you float on before the dive */}
-      <HeroWater />
-
       <div className={styles.content}>
         <h1 className={styles.title}>
           A community-driven platform for understanding and protecting

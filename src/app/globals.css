@@ -17,6 +17,7 @@
   --story-ink-muted: #4988C4;
   --story-glow: #ffffff;
   --story-glow-a: 0;
+  --story-ink-contrast: #ffffff;
 }
 
 body {
@@ -35,12 +36,14 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   line-height: 1.1;
   transition: color 0.4s ease;
-  text-shadow: 0 0 22px
-    color-mix(
-      in srgb,
-      var(--story-glow) calc(var(--story-glow-a) * 100%),
-      transparent
-    );
+  text-shadow:
+    0 0 10px color-mix(in srgb, var(--story-ink-contrast) 32%, transparent),
+    0 0 22px
+      color-mix(
+        in srgb,
+        var(--story-glow) calc(var(--story-glow-a) * 100%),
+        transparent
+      );
 }
 
 h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); }
@@ -51,12 +54,14 @@ p {
   color: var(--story-ink-muted);
   line-height: 1.7;
   transition: color 0.4s ease;
-  text-shadow: 0 0 18px
-    color-mix(
-      in srgb,
-      var(--story-glow) calc(var(--story-glow-a) * 100%),
-      transparent
-    );
+  text-shadow:
+    0 0 8px color-mix(in srgb, var(--story-ink-contrast) 30%, transparent),
+    0 0 18px
+      color-mix(
+        in srgb,
+        var(--story-glow) calc(var(--story-glow-a) * 100%),
+        transparent
+      );
 }
 
 /* One narrative — chapters share the same flowing water, never a box. */
