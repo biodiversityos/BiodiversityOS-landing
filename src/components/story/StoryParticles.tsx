@@ -101,8 +101,12 @@ export default function StoryParticles() {
       }
     };
 
+    // Reading a CSS var forces a style recalc — do it every ~15 frames,
+    // not every frame (the value drifts slowly with scroll anyway).
+    let mul = depthAlpha();
+    let frame = 0;
     const step = () => {
-      const mul = depthAlpha();
+      if ((frame = (frame + 1) % 15) === 0) mul = depthAlpha();
       ctx.clearRect(0, 0, w, h);
       for (const p of particles) {
         p.x += p.vx;

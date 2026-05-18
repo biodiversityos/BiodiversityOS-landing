@@ -51,11 +51,13 @@ export default function StoryShell({
   const rayAlpha = useTransform(scrollYProgress, [0, 0.28, 0.44], [0.35, 0.22, 0]);
   const rayShift = useTransform(scrollYProgress, [0, 0.44], [0, 40]);
 
-  // Shark: present while it forms, then recedes out of the text's way.
+  // Shark lives only in the blue water: invisible on the bright surface,
+  // it coalesces out of the deep as the background turns blue, holds, then
+  // eases off at the very bottom.
   const shark = useTransform(
     scrollYProgress,
-    [0, 0.1, 0.3, 0.46, 0.72, 1],
-    [0.45, 0.9, 0.6, 0.16, 0.1, 0.07],
+    [0, 0.44, 0.56, 0.85, 1],
+    [0, 0, 0.85, 0.78, 0.42],
   );
 
   useEffect(() => {

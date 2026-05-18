@@ -47,8 +47,10 @@ function smoothstep(edge0: number, edge1: number, x: number) {
  *  - dissolves into a sparse data cloud in the deep
  */
 function cohesionFor(p: number) {
-  const assemble = smoothstep(0.13, 0.36, p);
-  const dissolve = 1 - smoothstep(0.7, 0.95, p);
+  // Coalesce out of the deep as the water turns blue, hold through the
+  // abyss, loosen only slightly at the very bottom.
+  const assemble = smoothstep(0.44, 0.62, p);
+  const dissolve = 1 - 0.45 * smoothstep(0.9, 1.0, p);
   return Math.min(assemble, dissolve);
 }
 
@@ -94,12 +96,12 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
     camera.position.z = 10; // Adjusted to prevent clipping
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
+      antialias: false,
       powerPreference: "high-performance",
     });
     renderer.setClearColor(0x000000, 0); // Transparent background
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     container.appendChild(renderer.domElement);
 
     let particles: THREE.Points;
@@ -327,11 +329,17 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
 
       if (!particles) return;
 
+      const p = progressRef.current;
+      // The shark only lives in the blue/deep water. On the bright surface
+      // (or when the tab is hidden) skip the entire particle simulation and
+      // GPU upload — the layer is invisible there, so this is the main
+      // performance win for the hero / early chapters.
+      if (document.hidden || p < 0.4) return;
+
       const material = particles.material as THREE.ShaderMaterial;
       material.uniforms.uTime.value = clock.getElapsedTime();
 
-      const p = progressRef.current;
-      // 0 = scattered (surface), 1 = locked into the shark shape.
+      // 0 = scattered, 1 = locked into the shark shape.
       const cohesion = cohesionFor(p);
       // Outward drift as the shark dissolves into the data cloud in the deep.
       const disperse = smoothstep(0.7, 0.98, p);
