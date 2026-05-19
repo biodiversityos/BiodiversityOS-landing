@@ -18,7 +18,7 @@ export default function StoryBackground() {
         className="fixed inset-0 -z-20"
         style={{
           background:
-            "linear-gradient(180deg,#EAF6FB 0%,#BDE8F5 22%,#1C4D8D 60%,#0F2854 100%)",
+            "linear-gradient(180deg,#EAF6FB 0%,#BDE8F5 22%,#1C4D8D 58%,#0F2854 85%,#081A30 100%)",
         }}
       />
     );
@@ -26,12 +26,12 @@ export default function StoryBackground() {
 
   return (
     <div aria-hidden className="fixed inset-0 -z-20 overflow-hidden">
-      {/* The deep — always-present base */}
+      {/* The deep — always-present base, sinking to a near-black abyss */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg,#1C4D8D 0%,#143A6B 55%,#0F2854 100%)",
+            "linear-gradient(180deg,#1C4D8D 0%,#143A6B 45%,#0F2854 78%,#081A30 100%)",
         }}
       />
 
@@ -71,6 +71,28 @@ export default function StoryBackground() {
           }}
         />
       </div>
+
+      {/* Abyss vignette — the water closes in as you sink (pressure/depth) */}
+      <div
+        className="absolute inset-0"
+        style={{
+          opacity: "var(--story-deep, 0)",
+          transition: "opacity 0.6s cubic-bezier(0.4,0,0.2,1)",
+          background:
+            "radial-gradient(130% 95% at 50% 26%, rgba(3,12,28,0) 34%, rgba(3,11,26,0.5) 74%, rgba(1,7,18,0.82) 100%)",
+        }}
+      />
+
+      {/* A slow drifting shaft of deep light for a touch of life */}
+      <div
+        className="animate-blob absolute left-1/3 top-0 h-full w-1/3 blur-3xl"
+        style={{
+          opacity: "var(--story-deep, 0)",
+          transition: "opacity 0.8s cubic-bezier(0.4,0,0.2,1)",
+          background:
+            "radial-gradient(closest-side,rgba(56,123,196,0.16),transparent 72%)",
+        }}
+      />
     </div>
   );
 }

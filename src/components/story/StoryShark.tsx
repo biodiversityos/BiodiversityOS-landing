@@ -1,19 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useScroll, useReducedMotion } from "framer-motion";
+import { useReducedMotion, type MotionValue } from "framer-motion";
 import SharkParticles from "../SharkParticles";
 
 /**
- * The shark is a through-line, not a backdrop for every paragraph: present
- * while it assembles (hero → origin), then receding to a faint trace so it
- * never competes with the reading column. Wrapper opacity is driven by the
- * --story-shark CSS var (set in StoryShell); the particle simulation reads a
- * live scroll MotionValue imperatively. One persistent canvas, never remounted.
+ * The shark only lives in the blue water. Wrapper opacity is driven by the
+ * --story-shark CSS var (set in StoryShell); the particle simulation reads
+ * the same viewport-anchored `dive` MotionValue, so it stays in sync with
+ * the surface→blue crossover. One persistent canvas, never remounted.
  */
-export default function StoryShark() {
+export default function StoryShark({ dive }: { dive: MotionValue<number> }) {
   const reducedMotion = useReducedMotion() ?? false;
-  const { scrollYProgress } = useScroll();
   const [count] = useState(() =>
     typeof window !== "undefined" && window.innerWidth < 640 ? 3500 : 8000,
   );
@@ -31,7 +29,7 @@ export default function StoryShark() {
         className="mt-[14vh] h-[min(60vh,560px)] w-full max-w-[760px] md:mr-[2vw]"
       >
         <SharkParticles
-          progress={scrollYProgress}
+          progress={dive}
           particleCount={count}
           interactive={false}
           staticAssembled={reducedMotion}

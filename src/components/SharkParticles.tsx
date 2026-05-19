@@ -50,7 +50,8 @@ function cohesionFor(p: number) {
   // Coalesce out of the deep as the water turns blue, hold through the
   // abyss, loosen only slightly at the very bottom.
   const assemble = smoothstep(0.44, 0.62, p);
-  const dissolve = 1 - 0.45 * smoothstep(0.9, 1.0, p);
+  // Hold the shape through the entire deep — only let go right at the end.
+  const dissolve = 1 - smoothstep(0.93, 1.0, p);
   return Math.min(assemble, dissolve);
 }
 
@@ -341,8 +342,9 @@ export const SharkParticles: React.FC<SharkParticlesProps> = ({
 
       // 0 = scattered, 1 = locked into the shark shape.
       const cohesion = cohesionFor(p);
-      // Outward drift as the shark dissolves into the data cloud in the deep.
-      const disperse = smoothstep(0.7, 0.98, p);
+      // Outward drift only at the very end — the shark scatters into a
+      // sparse data cloud right as the dive bottoms out.
+      const disperse = smoothstep(0.93, 1.0, p);
 
       // Smooth mouse tracking
       if (targetMouse.x !== -999) {

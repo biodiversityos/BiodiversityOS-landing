@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useSyncExternalStore } from "react";
+import { useRef } from "react";
 import {
   motion,
   useScroll,
@@ -9,11 +9,12 @@ import {
   useReducedMotion,
 } from "framer-motion";
 
-const noopSubscribe = () => () => {};
-
 /**
- * Content rises out of the water as it enters the viewport — scroll-driven,
- * not a one-shot fade. Replaces the old per-section WaveTransition wrappers.
+ * Content emerges from the water as it enters the viewport. The motion has
+ * the weight and drag of moving through water: a slow, overdamped rise that
+ * trails the scroll slightly (buoyancy) while it sharpens from a soft murk
+ * into focus. No bounce, no loop, no flashes — it simply settles, so it
+ * never competes with reading.
  */
 export default function Reveal({
   children,
@@ -24,29 +25,24 @@ export default function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion() ?? false;
-  // Render plain on the server / first paint so the SSR markup matches the
-  // client (no hydration mismatch); attach scroll-driven motion after mount.
-  const mounted = useSyncExternalStore(
-    noopSubscribe,
-    () => true,
-    () => false,
-  );
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.95", "start 0.62"],
+    offset: ["start 0.96", "start 0.6"],
   });
+  // Overdamped + soft: glides into place with water-like resistance,
+  // never overshoots, and lags the scroll a touch (weight / buoyancy).
   const eased = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    restDelta: 0.001,
+    stiffness: 38,
+    damping: 22,
+    restDelta: 0.0005,
   });
 
-  const opacity = useTransform(eased, [0, 0.5], [0, 1]);
-  const y = useTransform(eased, [0, 1], [48, 0]);
-  const blur = useTransform(eased, [0, 0.4], ["blur(6px)", "blur(0px)"]);
+  const opacity = useTransform(eased, [0, 0.55], [0, 1]);
+  const y = useTransform(eased, [0, 1], [34, 0]);
+  const blur = useTransform(eased, [0, 0.5], ["blur(5px)", "blur(0px)"]);
 
-  if (reducedMotion || !mounted) {
+  if (reducedMotion) {
     return <div className={className}>{children}</div>;
   }
 
