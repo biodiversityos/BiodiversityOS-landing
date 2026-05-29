@@ -170,6 +170,31 @@ p {
   color: var(--color-primary);
   text-underline-offset: 3px;
 }
+.prose ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.prose ul > li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--story-ink-muted, #4988c4);
+}
+.prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  opacity: 0.85;
+}
 
 .metaRow {
   display: flex;

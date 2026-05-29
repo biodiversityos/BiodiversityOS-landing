@@ -38,6 +38,7 @@ export default function Footer() {
             <Link href="/species">Species</Link>
             <Link href="/blog">Blog</Link>
             <Link href="/faq">FAQ</Link>
+            <Link href="/privacy">Privacy</Link>
             <a
               href="https://app.biodiversityos.org/"
               target="_blank"
