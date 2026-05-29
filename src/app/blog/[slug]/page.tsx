@@ -181,7 +181,8 @@ export default async function BlogArticlePage({ params }: PageParams) {
         <header
           style={{
             background: "#ffffff",
-            padding: "1.5rem 0 clamp(2.5rem,6vw,4rem)",
+            padding:
+              "clamp(6.5rem, 11vh, 8.5rem) 0 clamp(2.5rem,6vw,4rem)",
             borderBottom: "1px solid rgba(15,40,84,0.08)",
           }}
         >

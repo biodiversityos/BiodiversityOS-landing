@@ -154,6 +154,28 @@ export default function StoryShell({
   useMotionValueEvent(deep, "change", set("--story-deep"));
   useMotionValueEvent(shark, "change", set("--story-shark"));
 
+  // On unmount (client-side navigation away from the home page) clear the
+  // inline story vars so the next page falls back to the safe :root
+  // defaults — otherwise the deep-water palette sticks and text turns light
+  // on a light background.
+  useEffect(() => {
+    const r = document.documentElement;
+    return () => {
+      [
+        "--story-ink",
+        "--story-ink-muted",
+        "--story-glow",
+        "--story-glow-a",
+        "--story-ink-contrast",
+        "--story-surface",
+        "--story-ray-a",
+        "--story-ray-y",
+        "--story-deep",
+        "--story-shark",
+      ].forEach((name) => r.style.removeProperty(name));
+    };
+  }, []);
+
   return (
     <>
       <StoryBackground />

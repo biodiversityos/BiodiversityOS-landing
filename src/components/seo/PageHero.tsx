@@ -17,7 +17,10 @@ export default function PageHero({
     <header
       style={{
         background: "#ffffff",
-        padding: "1.5rem 0 clamp(2.5rem, 6vw, 4.5rem)",
+        // Top padding clears the fixed site Header (~80px) so breadcrumbs
+        // never sit under it.
+        padding:
+          "clamp(6.5rem, 11vh, 8.5rem) 0 clamp(2.5rem, 6vw, 4.5rem)",
         borderBottom: "1px solid rgba(15,40,84,0.08)",
       }}
     >
