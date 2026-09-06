@@ -31,6 +31,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className={styles.navigation} aria-label="Main navigation">
+          <Link href="#observations" className={styles.navLink}>
+            The record
+          </Link>
           <Link href="#about" className={styles.navLink}>
             About
           </Link>
@@ -85,6 +88,13 @@ export default function Header() {
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ""}`}
       >
         <nav className={styles.mobileNav} aria-label="Mobile navigation">
+          <Link
+            href="#observations"
+            className={styles.mobileNavLink}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            The record
+          </Link>
           <Link
             href="#about"
             className={styles.mobileNavLink}

@@ -5,18 +5,18 @@ import Reveal from "../story/Reveal";
 const pillars = [
   {
     icon: LockKeyholeOpen,
-    title: "Open access",
-    body: "Data is available to support scientific research, conservation planning, and public understanding of biodiversity.",
+    title: "Nobody owns the record",
+    body: "Sightings are written to a public registry on Celo. There is no private database to lose, no login to grant, and no administrator who can quietly change what a record said.",
   },
   {
     icon: Leaf,
-    title: "Community knowledge",
-    body: "We recognize local ecological knowledge and ensure all contributions are properly attributed, respected, and used ethically.",
+    title: "Every sighting keeps its author",
+    body: "A record is attributed to the address that submitted it, and only that reporter can correct it. The observation stays credited to the person who was actually in the water.",
   },
   {
     icon: Boxes,
-    title: "Decentralized integrity",
-    body: "Designed for data traceability and long-term accessibility, with attribution built into every contribution.",
+    title: "Check it yourself",
+    body: "Anyone can replay the chain and rebuild the map from scratch. The map is a view of the record, not the record itself — which is what makes it worth trusting.",
   },
 ];
 
@@ -29,10 +29,12 @@ export default function TechSection() {
       <div className="chapter">
         <Reveal className={styles.intro}>
           <p className={styles.kicker}>How it stays open</p>
-          <h2 className={styles.title}>Open, verifiable, and decentralized.</h2>
+          <h2 className={styles.title}>
+            A record is only as good as your ability to check it.
+          </h2>
           <p className={styles.lead}>
-            BiodiversityOS integrates decentralized technologies so biodiversity
-            data is transparent, traceable, and openly accessible.
+            Conservation data usually asks you to trust whoever holds the
+            spreadsheet. This one does not.
           </p>
         </Reveal>
 

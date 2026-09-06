@@ -7,18 +7,18 @@ export default function HeroSection() {
     <section
       id="hero"
       className={styles.hero}
-      aria-label="BiodiversityOS — Community-Driven Marine Biodiversity Platform"
+      aria-label="BiodiversityOS — seven years of shark sightings in Cozumel"
     >
       <div className={styles.content}>
         <h1 className={styles.title}>
-          A community-driven platform for understanding and protecting
+          Divers in Cozumel have been counting
           <br />
-          <span className={styles.highlight}>biodiversity.</span>
+          <span className={styles.highlight}>sharks for seven years.</span>
         </h1>
         <p className={styles.description}>
-          Transforming real-world observations into open, verifiable knowledge.
-          Starting with shark data in Cozumel, we are building a global network
-          of biodiversity intelligence.
+          743 sightings across 66 dive sites, almost all of them logged on
+          ordinary recreational dives. Every record is public, georeferenced and
+          permanent — an open reef survey anyone can check, and add to.
         </p>
         <div className={styles.actions}>
           <Link
@@ -28,7 +28,7 @@ export default function HeroSection() {
             className={styles.btnPrimary}
           >
             <SharkIcon size={20} color="white" />
-            Explore Data
+            Explore the record
           </Link>
           <Link
             href="https://app.biodiversityos.org/"

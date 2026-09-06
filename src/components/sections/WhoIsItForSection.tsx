@@ -6,22 +6,22 @@ const audiences = [
   {
     icon: Microscope,
     title: "Researchers & scientists",
-    body: "Access structured, georeferenced biodiversity data to support research and conservation.",
+    body: "Georeferenced sightings with species, counts, depth, dive site and the observer's own field note — downloadable, citable, and free.",
   },
   {
     icon: Users,
     title: "Local communities",
-    body: "Contribute observations, share knowledge, and participate in documenting ecosystems.",
+    body: "Dive operations and guides who log what they see, and keep credit for it. The record grows from working days, not expeditions.",
   },
   {
     icon: Leaf,
     title: "Conservation organizations",
-    body: "Use spatial insights to inform protection strategies and identify priority areas.",
+    body: "Seven years of presence data across a national park, by site and by season — the kind of baseline that is usually missing.",
   },
   {
     icon: Network,
     title: "Web3 / DeSci community",
-    body: "Engage with open biodiversity infrastructure and contribute to a community-governed data commons.",
+    body: "A live registry with real observations behind it, not a demo. The contracts, the indexer and the app are all open.",
   },
 ];
 
@@ -35,11 +35,11 @@ export default function WhoIsItForSection() {
         <Reveal className={styles.intro}>
           <p className={styles.kicker}>The network</p>
           <h2 className={styles.title}>
-            One network closing biodiversity data gaps.
+            The people in the water see it first.
           </h2>
           <p className={styles.lead}>
-            Biodiversity data gaps are significant. Observations from divers,
-            fishers, and researchers help build a more complete picture.
+            A research vessel visits a reef for a season. A dive guide is there
+            four times a week, for years. That difference is the whole point.
           </p>
         </Reveal>
 

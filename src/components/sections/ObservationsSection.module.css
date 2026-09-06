@@ -1,0 +1,234 @@
+.kicker {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--story-ink-muted);
+  margin-bottom: 1.25rem;
+}
+
+.intro {
+  max-width: 700px;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+}
+
+/* ── Headline figures ─────────────────────────────────────────────────────── */
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem);
+  padding: clamp(1.75rem, 4vw, 2.5rem) 0;
+  border-top: 1px solid color-mix(in srgb, var(--story-ink) 22%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--story-ink) 22%, transparent);
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.figureValue {
+  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--story-ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* The year span is a much longer string than the counts beside it; at the same
+   size it wrapped mid-value and broke the rhythm of the row. */
+.figureWide {
+  font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+  align-self: end;
+  padding-bottom: 0.2rem;
+}
+
+.figureLabel {
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--story-ink-muted);
+}
+
+/* ── Panels ───────────────────────────────────────────────────────────────── */
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(3rem, 7vw, 4.5rem);
+  margin-bottom: clamp(3rem, 7vw, 4.5rem);
+}
+
+.panel {
+  min-width: 0;
+}
+
+.panelTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.panelNote {
+  font-size: 0.98rem;
+  color: var(--story-ink-muted);
+  margin-bottom: 2rem;
+  max-width: 46ch;
+}
+
+/* ── Species bars ─────────────────────────────────────────────────────────── */
+
+.species {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.speciesRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.speciesHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.speciesName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--story-ink);
+}
+
+.speciesLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.speciesCount {
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--story-ink-muted);
+}
+
+/* Colours follow --story-ink, which StoryShell inverts as the page descends:
+   dark on the bright surface, light once the water goes deep. A fixed brand
+   blue would disappear against the deep-water background this section sits on. */
+.bar {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--story-ink) 14%, transparent);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--story-ink) 78%, transparent);
+}
+
+.speciesSci {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--story-ink-muted);
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Seasonality ──────────────────────────────────────────────────────────── */
+
+.months {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(0.25rem, 1vw, 0.6rem);
+  align-items: end;
+}
+
+.month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.monthTrack {
+  width: 100%;
+  height: clamp(90px, 16vw, 150px);
+  display: flex;
+  align-items: flex-end;
+  background: color-mix(in srgb, var(--story-ink) 8%, transparent);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.monthFill {
+  width: 100%;
+  background: color-mix(in srgb, var(--story-ink) 45%, transparent);
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+}
+
+.monthPeak {
+  background: color-mix(in srgb, var(--story-ink) 85%, transparent);
+}
+
+.monthCount {
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--story-ink-muted);
+}
+
+.monthLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--story-ink-muted);
+  text-transform: uppercase;
+}
+
+/* ── Footnote ─────────────────────────────────────────────────────────────── */
+
+.footnote {
+  max-width: 640px;
+}
+
+.footnote p {
+  font-size: 0.95rem;
+  color: var(--story-ink-muted);
+}
+
+@media (min-width: 700px) {
+  .figures {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .panels {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+}
