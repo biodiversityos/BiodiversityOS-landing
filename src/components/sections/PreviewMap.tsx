@@ -26,7 +26,8 @@ const PREVIEW_SITES = [
   { id: 8, name: "Santa Rosa",               lat: 20.37972, lng: -87.02917 },
 ];
 
-// CARTO's keyless endpoint now serves an "API KEY REQUIRED" placeholder tile.
+// CARTO serves an "API KEY REQUIRED" watermark without a key, and Esri's Ocean
+// basemap has no data over Cozumel — both at HTTP 200, so they fail silently.
 const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services";
 
 export default function PreviewMap() {
@@ -44,8 +45,8 @@ export default function PreviewMap() {
       keyboard={false}
       attributionControl={false}
     >
-      <TileLayer url={`${ESRI}/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}`} maxZoom={16} />
-      <TileLayer url={`${ESRI}/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}`} maxZoom={16} />
+      <TileLayer url={`${ESRI}/World_Imagery/MapServer/tile/{z}/{y}/{x}`} maxZoom={18} />
+      <TileLayer url={`${ESRI}/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}`} maxZoom={18} />
       {PREVIEW_SITES.map((site) => (
         <Marker
           key={site.id}
