@@ -3,7 +3,6 @@
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useEffect } from "react";
 
 // Fix for default marker icons in Leaflet + Next.js
 const customIcon = new L.Icon({
@@ -14,13 +13,21 @@ const customIcon = new L.Icon({
   iconAnchor: [12, 41],
 });
 
-const MOCK_POINTS = [
-  { id: 1, lat: 20.37, lng: -87.04 },
-  { id: 2, lat: 20.45, lng: -87.10 },
-  { id: 3, lat: 20.30, lng: -86.95 },
-  { id: 4, lat: 20.50, lng: -87.20 },
-  { id: 5, lat: 20.25, lng: -87.15 },
+// The eight Cozumel dive sites with the most recorded sightings. Real
+// coordinates from the survey, so the preview is not inventing locations.
+const PREVIEW_SITES = [
+  { id: 1, name: "Yucab",                    lat: 20.42303, lng: -87.01637 },
+  { id: 2, name: "Paraiso Bajo",             lat: 20.46942, lng: -86.98147 },
+  { id: 3, name: "Punta Sur",                lat: 20.30306, lng: -87.02500 },
+  { id: 4, name: "Cedral Cordillera",        lat: 20.37439, lng: -87.02891 },
+  { id: 5, name: "Cuevas",                   lat: 20.32806, lng: -87.02694 },
+  { id: 6, name: "Paso del Cedral",          lat: 20.37028, lng: -87.02833 },
+  { id: 7, name: "Paso del Cedral Profundo", lat: 20.37552, lng: -87.02984 },
+  { id: 8, name: "Santa Rosa",               lat: 20.37972, lng: -87.02917 },
 ];
+
+// CARTO's keyless endpoint now serves an "API KEY REQUIRED" placeholder tile.
+const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services";
 
 export default function PreviewMap() {
   return (
@@ -37,11 +44,15 @@ export default function PreviewMap() {
       keyboard={false}
       attributionControl={false}
     >
-      <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-      />
-      {MOCK_POINTS.map((point) => (
-        <Marker key={point.id} position={[point.lat, point.lng]} icon={customIcon} />
+      <TileLayer url={`${ESRI}/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}`} maxZoom={16} />
+      <TileLayer url={`${ESRI}/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}`} maxZoom={16} />
+      {PREVIEW_SITES.map((site) => (
+        <Marker
+          key={site.id}
+          position={[site.lat, site.lng]}
+          icon={customIcon}
+          title={site.name}
+        />
       ))}
     </MapContainer>
   );
