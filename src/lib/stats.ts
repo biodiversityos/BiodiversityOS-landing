@@ -6,8 +6,8 @@
  * Revalidated hourly — these numbers move a few times a month at most.
  */
 const INDEXER_URL =
-  process.env.INDEXER_INTERNAL_URL ??
-  process.env.NEXT_PUBLIC_INDEXER_URL ??
+  process.env.INDEXER_INTERNAL_URL ||
+  process.env.NEXT_PUBLIC_INDEXER_URL ||
   "https://indexer.biodiversityos.org/graphql";
 
 const REVALIDATE_SECONDS = 3600;
